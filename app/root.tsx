@@ -6,7 +6,7 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
-  Link
+  Link,
 } from "react-router";
 
 // 컴포넌트 임포트
@@ -54,7 +54,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 export default function App() {
   return (
     <>
-      <Navigation />
+      <Navigation isLoggedIn={true} />
       <Outlet />
     </>
   );
