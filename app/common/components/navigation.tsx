@@ -19,7 +19,7 @@ import {
 } from "./ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { DropdownMenuTrigger, DropdownMenuItem } from "./ui/dropdown-menu";
-import { SquareKanban, SettingsIcon, UserIcon, LogOutIcon } from "lucide-react";
+import { SquareKanban, SettingsIcon, UserIcon, LogOutIcon, Menu } from "lucide-react";
 
 const menus = [
   {
