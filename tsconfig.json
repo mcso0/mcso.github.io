@@ -23,5 +23,8 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true
+  },
+  "scripts": {
+    "typecheck": "react-router typegen && tsc"
   }
 }
