@@ -19,7 +19,15 @@ import {
 } from "./ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { DropdownMenuTrigger, DropdownMenuItem } from "./ui/dropdown-menu";
-import { SquareKanban, SettingsIcon, UserIcon, LogOutIcon, Menu } from "lucide-react";
+import {
+  SquareKanban,
+  SettingsIcon,
+  UserIcon,
+  LogOutIcon,
+  Menu,
+  BellIcon,
+  MessageCircleIcon,
+} from "lucide-react";
 
 const menus = [
   {
@@ -135,7 +143,15 @@ const menus = [
   },
 ];
 
-export function Navigation({ isLoggedIn }: { isLoggedIn: boolean }) {
+export function Navigation({
+  isLoggedIn,
+  hasNotifications,
+  hasMessages,
+}: {
+  isLoggedIn: boolean;
+  hasNotifications: boolean;
+  hasMessages: boolean;
+}) {
   return (
     <nav
       className="flex px-20 h-16 items-center justify-between
@@ -189,6 +205,26 @@ export function Navigation({ isLoggedIn }: { isLoggedIn: boolean }) {
       </div>
       {isLoggedIn ? (
         <div className="flex items-center gap-4">
+          <Button size="icon" variant="ghost" asChild className="relative">
+            <Link to="/my/notifications">
+              <BellIcon className="size-5" />
+              {hasNotifications && (
+                <span className="absolute top-1 right-1 bg-red-500 rounded-full w-2 h-2">
+                  {hasNotifications}
+                </span>
+              )}
+            </Link>
+          </Button>
+          <Button size="icon" variant="ghost" asChild className="relative">
+            <Link to="/my/messages">
+              <MessageCircleIcon className="size-5" />
+              {hasMessages && (
+                <span className="absolute top-1 right-1 bg-red-500 rounded-full w-2 h-2">
+                  {hasMessages}
+                </span>
+              )}
+            </Link>
+          </Button>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Avatar className="w-8 h-8 cursor-pointer">
