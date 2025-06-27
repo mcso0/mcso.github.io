@@ -1,21 +1,5 @@
 import type { MetaFunction } from "react-router";
-import {
-  Card,
-  CardAction,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "~/common/components/ui/card";
-import { Link } from "react-router";
-import { Button } from "~/common/components/ui/button";
-import {
-  ChevronUpIcon,
-  EyeIcon,
-  HeartIcon,
-  MessageCircleIcon,
-} from "lucide-react";
+import { ProductCard } from "~/features/products/componets/product-card";
 
 // 메타데이터를 정의하는 함수입니다.
 // 이 함수는 웹페이지의 제목과 설명을 설정합니다.
@@ -42,38 +26,15 @@ export default function Home() {
           </p>
         </div>
         <div>
-          <Link to={"/products/productId"}>
-            <Card className="w-full flex flex-row justify-between items-center hover:bg-neutral-100 dark:hover:bg-neutral-900">
-              <CardHeader className="w-full">
-                <CardTitle className="w-full text-2xl font-semibold leading-none tracking-tight">
-                  Product 1
-                </CardTitle>
-                <CardDescription className="w-full text-muted-foreground text-sm">
-                  Product description
-                </CardDescription>
-                <div className="flex items-center gap-4 mt-2">
-                  <div className="flex items-center gap-px text-sm text-muted-foreground">
-                    <MessageCircleIcon className="w-4 h-4" />
-                    <span>12</span>
-                  </div>
-                  <div className="flex items-center gap-px text-sm text-muted-foreground">
-                    <EyeIcon className="w-4 h-4" />
-                    <span>12</span>
-                  </div>
-                  <div className="flex items-center gap-px text-sm text-muted-foreground">
-                    <HeartIcon className="w-4 h-4" />
-                    <span>12</span>
-                  </div>
-                </div>
-              </CardHeader>
-              <CardFooter>
-                <Button variant="outline" className="flex flex-col h-14">
-                  <ChevronUpIcon className="size-4 shrink-0" />
-                  <span>120</span>
-                </Button>
-              </CardFooter>
-            </Card>
-          </Link>
+          <ProductCard
+            productId="product-1"
+            title="Product 1"
+            description="Product description"
+            commentCount={12}
+            viewCount={12}
+            likeCount={12}
+            voteCount={120}
+          />
         </div>
       </div>
     </div>
