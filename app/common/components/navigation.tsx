@@ -158,7 +158,10 @@ export function Navigation({
     backdrop-blur fixed top-0 left-0 right-0 z-50 bg-background/50"
     >
       <div className="flex items-center gap-4">
-        <Link to="/" className="font-bold text-lg tracking-tight text-primary">
+        <Link
+          to="/"
+          className="font-bold text-lg tracking-tight text-black dark:text-white"
+        >
           wemake
         </Link>
         <div className="w-px h-6 mx-4 bg-gray-600/50"></div>
@@ -275,7 +278,7 @@ export function Navigation({
           <Button variant="outline" asChild>
             <Link to="/auth/login">Login</Link>
           </Button>
-          <Button variant="default" asChild>
+          <Button variant="default" asChild className="primary">
             <Link to="/auth/join">Join</Link>
           </Button>
         </div>

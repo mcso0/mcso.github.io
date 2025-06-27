@@ -1,6 +1,8 @@
 import { Link } from "react-router";
 import {
   Card,
+  CardAction,
+  CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
@@ -37,9 +39,7 @@ export function ProductCard({
     <Link to={`/products/${productId}`}>
       <Card className="w-full flex flex-row justify-between items-center hover:bg-neutral-100 dark:hover:bg-neutral-900">
         <CardHeader className="w-full">
-          <CardTitle className="w-full text-2xl font-semibold leading-none tracking-tight">
-            {title}
-          </CardTitle>
+          <CardTitle className="w-full">{title}</CardTitle>
           <CardDescription className="w-full text-muted-foreground text-sm">
             {description}
           </CardDescription>
