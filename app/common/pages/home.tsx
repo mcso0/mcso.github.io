@@ -1,5 +1,5 @@
 import type { MetaFunction } from "react-router";
-import { ProductCard } from "~/features/products/componets/product-card";
+import ProductCard from "~/features/products/components/product-card";
 import { Button } from "~/common/components/ui/button";
 import { Link } from "react-router";
 import {
@@ -44,13 +44,14 @@ export default function Home() {
         </div>
         {Array.from({ length: 11 }).map((_, index) => (
           <ProductCard
-            productId={`product-${index + 1}`}
-            title={`Product ${index + 1}`}
+            key={`product-${index + 1}`}
+            id={`product-${index + 1}`}
+            name={`Product ${index + 1}`}
             description={`Product description ${index + 1}`}
             commentCount={12}
             viewCount={12}
             likeCount={12}
-            voteCount={120}
+            upvoteCount={120}
           />
         ))}
       </div>
@@ -83,7 +84,6 @@ export default function Home() {
                 <span className="font-semibold">Deny</span>
                 <span>Productivity</span>
                 <span className="ml-auto">12 hours ago</span>
-                <span className="ml-auto">12 comments</span>
               </div>
             </div>
           </CardHeader>
