@@ -2,85 +2,59 @@ import { Link } from "react-router";
 import {
   Card,
   CardHeader,
-  CardContent,
   CardTitle,
+  CardContent,
+  CardFooter,
 } from "~/common/components/ui/card";
 import { Button } from "~/common/components/ui/button";
-import { EyeIcon, HeartIcon, LockIcon } from "lucide-react";
-import { cn } from "~/lib/utils";
+import { EyeIcon, HeartIcon, ArrowRightIcon } from "lucide-react";
 
+// IdeaCard 컴포넌트의 props 타입을 정의합니다
+// 아이디어 정보를 동적으로 표시할 수 있도록 만들어요
 interface IdeaCardProps {
-  id: string;
-  title: string;
-  viewCount: number;
-  timeAgo: string;
-  likeCount: number;
-  claimed?: boolean;
+  id: string;           // 아이디어 ID (링크에 사용)
+  title: string;        // 아이디어 제목
+  viewCount: number;    // 조회수
+  timeAgo: string;      // 시간 정보 (예: 12 hours ago)
+  likeCount: number;    // 좋아요 수
 }
 
-export function IdeaCard({
+// IdeaCard 컴포넌트
+// 아이디어 카드를 props로 받은 데이터로 렌더링합니다
+export default function IdeaCard({
   id,
   title,
   viewCount,
   timeAgo,
   likeCount,
-  claimed = false,
 }: IdeaCardProps) {
   return (
-    <Card className="p-6 hover:bg-neutral-50 dark:hover:bg-neutral-900 transition-colors cursor-pointer">
+    <Card className="w-full hover:bg-neutral-100 dark:hover:bg-neutral-900 cursor-pointer gap-2">
       <Link to={`/ideas/${id}`} className="w-full">
-        <CardHeader className="p-0">
-          <CardTitle className="text-base leading-relaxed font-semibold">
-            <span
-              className={cn(
-                claimed
-                  ? "bg-muted-foreground selection:bg-muted-foreground text-muted-foreground"
-                  : "",
-                "text-base leading-relaxed font-semibold"
-              )}
-            >
-              {title}
-            </span>
+        <CardHeader className="cursor-pointer">
+          <CardTitle className="text-xl">
+            {title}
           </CardTitle>
         </CardHeader>
       </Link>
-      <CardContent className="flex w-full justify-between px-0 py-0">
-        <div className="flex w-full items-center justify-start gap-4 text-sm text-muted-foreground">
-          <div className="flex items-center gap-1">
-            <EyeIcon className="w-4 h-4" />
-            <span>{viewCount}</span>
-          </div>
-          <span className="text-sm text-muted-foreground">{timeAgo}</span>
-        </div>
-
-        <div className="flex items-center justify-end gap-3">
-          <div className="flex items-center gap-1 text-sm text-muted-foreground">
-            <HeartIcon className="w-4 h-4" />
-            <span>{likeCount}</span>
-          </div>
-          {!claimed && (
-            <Button
-              variant="default"
-              size="sm"
-              className="text-xs cursor-pointer"
-              asChild
-            >
-              <Link to={`/ideas/${id}/claim`}>Claim</Link>
-            </Button>
-          )}
-          {claimed && (
-            <Button
-              variant="outline"
-              size="sm"
-              className="text-xs cursor-not-allowed flex items-center gap-1 text-muted-foreground"
-              disabled={true}
-            >
-              <LockIcon className="w-4 h-4" />
-              Claimed
-            </Button>
-          )}
+      <CardContent className="flex items-center justify-between text-sm text-muted-foreground">
+        <div className="flex items-center gap-2">
+          <EyeIcon className="w-4 h-4" />
+          <span>{viewCount}</span>
+          <span className="mx-1">•</span>
+          <span>{timeAgo}</span>
         </div>
       </CardContent>
+      <CardFooter className="flex justify-end mt-4 gap-4">
+        <Button variant="ghost" className="flex items-center gap-2 hover:bg-transparent cursor-pointer group">
+          <HeartIcon className="w-4 h-4 group-hover:text-red-500 transition-colors duration-200" />
+          <span>{likeCount}</span>
+        </Button>
+        <Button variant="default" className="flex items-center gap-2 cursor-pointer">
+          <span>Claim idea</span>
+          <ArrowRightIcon className="w-4 h-4" />
+        </Button>
+      </CardFooter>
     </Card>
   );
-}
+} 

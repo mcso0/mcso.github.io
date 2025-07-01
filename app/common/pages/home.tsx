@@ -1,16 +1,8 @@
 import type { MetaFunction } from "react-router";
 import ProductCard from "~/features/products/components/product-card";
-import { Button } from "~/common/components/ui/button";
+import PostCard from "~/features/community/components/post-card";
+import IdeaCard from "~/features/ideas/components/idea-card";
 import { Link } from "react-router";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardFooter,
-} from "../components/ui/card";
-import { Avatar, AvatarFallback, AvatarImage } from "../components/ui/avatar";
-import { UserIcon } from "lucide-react";
 
 // 메타데이터를 정의하는 함수입니다.
 // 이 함수는 웹페이지의 제목과 설명을 설정합니다.
@@ -27,6 +19,7 @@ export const meta: MetaFunction = () => {
 export default function Home() {
   return (
     <div className="px-20 space-y-20">
+      {/* 오늘의 제품 */}
       <div className="grid grid-cols-3 gap-4">
         <div className="flex flex-col gap-2">
           <h2 className="text-4xl font-bold leading-tight tracking-tight">
@@ -55,6 +48,7 @@ export default function Home() {
           />
         ))}
       </div>
+      {/* 최근 토론 */}
       <div className="grid grid-cols-3 gap-4">
         <div className="flex flex-col gap-2">
           <h2 className="text-4xl font-bold leading-tight tracking-tight">
@@ -70,34 +64,41 @@ export default function Home() {
             Explore all discussions &rarr;
           </Link>
         </div>
-        <Card className="hover:bg-neutral-100 dark:hover:bg-neutral-900 cursor-pointer gap-4 transition-colors duration-200">
-          <CardHeader className="flex flex-row items-center gap-4">
-            <Avatar className="size-14">
-              <AvatarFallback>
-                <UserIcon className="size-4" />
-              </AvatarFallback>
-              <AvatarImage src="https://github.com/apple.png" />
-            </Avatar>
-            <div className="space-y-2">
-              <CardTitle>Discussion Title</CardTitle>
-              <div className="flex items-center flex-start gap-2 text-sm leading-tight text-muted-foreground">
-                <span className="font-semibold">Deny</span>
-                <span>Productivity</span>
-                <span className="ml-auto">12 hours ago</span>
-              </div>
-            </div>
-          </CardHeader>
-          <CardFooter className="flex justify-end">
-            <Button variant="link" className="p-0" asChild>
-              <Link
-                to="/community/postId"
-                className="flex flex-row items-center"
-              >
-                <span>Reply &rarr;</span>
-              </Link>
-            </Button>
-          </CardFooter>
-        </Card>
+        {Array.from({ length: 11 }).map((_, index) => (
+          <PostCard
+            key={`post-${index + 1}`}
+            id={`post-${index + 1}`}
+            title={`what is ${index + 1}`}
+            author={`Author ${index + 1}`}
+            authorAvatarUrl="https://github.com/apple.png"
+            category={`Category ${index + 1}`}
+            timeAgo={`${index + 1} hours ago`}
+          />
+        ))}
+      </div>
+      {/* Ideas GPT */}
+      <div className="grid grid-cols-3 gap-4">
+        <div className="flex flex-col gap-2">
+          <h2 className="text-4xl font-bold leading-tight tracking-tight">
+            Ideas GPT
+          </h2>
+          <p className="text-xl font-light text-muted-foreground">
+            Find ideas for your next project.
+          </p>
+          <Link
+            to="/products/ideas-gpt"
+            className="inline-flex items-center justify-start p-0 mt-2 text-sm font-medium no-underline text-primary hover:text-primary/80 transition-colors duration-200 underline-offset-4 hover:underline"
+          >
+            Explore all ideas &rarr;
+          </Link>
+        </div>
+          <IdeaCard
+            id="ideasId"
+            title="A startup that creates an AI-powered generated personal trainer, delivering customized fitness recommendations and tracking of progress using a mobile app to track workouts and progress as well as a website to manage the business."
+            viewCount={123}
+            timeAgo="12 hours ago"
+            likeCount={120}
+          />
       </div>
     </div>
   );
