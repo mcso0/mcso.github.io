@@ -172,7 +172,9 @@ export function Navigation({
                 {menu.items ? (
                   <>
                     <Link to={menu.to}>
-                      <NavigationMenuTrigger>{menu.name}</NavigationMenuTrigger>
+                      <NavigationMenuTrigger className="cursor-pointer">
+                        {menu.name}
+                      </NavigationMenuTrigger>
                     </Link>
                     <NavigationMenuContent>
                       <ul className="grid w-[600px] font-light gap-3 p-4 grid-cols-2">

@@ -3,6 +3,7 @@ import ProductCard from "~/features/products/components/product-card";
 import PostCard from "~/features/community/components/post-card";
 import IdeaCard from "~/features/ideas/components/idea-card";
 import { Link } from "react-router";
+import Footer from "../components/page-footer";
 
 // 메타데이터를 정의하는 함수입니다.
 // 이 함수는 웹페이지의 제목과 설명을 설정합니다.
@@ -18,7 +19,7 @@ export const meta: MetaFunction = () => {
 
 export default function Home() {
   return (
-    <div className="px-20 space-y-20">
+    <div className="px-20 space-y-40">
       {/* 오늘의 제품 */}
       <div className="grid grid-cols-3 gap-4">
         <div className="flex flex-col gap-2">
@@ -73,6 +74,8 @@ export default function Home() {
             authorAvatarUrl="https://github.com/apple.png"
             category={`Category ${index + 1}`}
             timeAgo={`${index + 1} hours ago`}
+            viewCount={12}
+            commentCount={12}
           />
         ))}
       </div>
@@ -92,14 +95,20 @@ export default function Home() {
             Explore all ideas &rarr;
           </Link>
         </div>
+        {Array.from({ length: 11 }).map((_, index) => (
           <IdeaCard
-            id="ideasId"
+            key={`idea-${index + 1}`}
+            id={`idea-${index + 1}`}
             title="A startup that creates an AI-powered generated personal trainer, delivering customized fitness recommendations and tracking of progress using a mobile app to track workouts and progress as well as a website to manage the business."
             viewCount={123}
             timeAgo="12 hours ago"
             likeCount={120}
+            isClaimed={index % 2 === 0}
+            commentCount={12}
           />
+        ))}
       </div>
+      <Footer />
     </div>
   );
 }

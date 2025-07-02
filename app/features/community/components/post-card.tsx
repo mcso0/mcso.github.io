@@ -6,18 +6,24 @@ import {
   CardFooter,
 } from "~/common/components/ui/card";
 import { Button } from "~/common/components/ui/button";
-import { Avatar, AvatarFallback, AvatarImage } from "~/common/components/ui/avatar";
-import { UserIcon } from "lucide-react";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "~/common/components/ui/avatar";
+import { EyeIcon, MessageCircleIcon, UserIcon } from "lucide-react";
 
 // PostCard 컴포넌트의 props 타입을 정의합니다
 // 커뮤니티 포스트 정보를 동적으로 표시할 수 있도록 만들어요
 interface PostCardProps {
-  id: string;           // 포스트 ID (링크에 사용)
-  title: string;        // 토론 제목
-  author: string;       // 작성자 이름
-  category: string;     // 카테고리 (예: Productivity)
-  timeAgo: string;      // 시간 정보 (예: 12 hours ago)
-  authorAvatarUrl?: string;   // 프로필 이미지 URL (옵션)
+  id: string; // 포스트 ID (링크에 사용)
+  title: string; // 토론 제목
+  author: string; // 작성자 이름
+  category: string; // 카테고리 (예: Productivity)
+  timeAgo: string; // 시간 정보 (예: 12 hours ago)
+  authorAvatarUrl?: string; // 프로필 이미지 URL (옵션)
+  viewCount: number; // 조회수
+  commentCount: number; // 댓글 수
 }
 
 // PostCard 컴포넌트
@@ -29,6 +35,8 @@ export default function PostCard({
   category,
   timeAgo,
   authorAvatarUrl,
+  viewCount,
+  commentCount,
 }: PostCardProps) {
   return (
     <Link to={`/community/${id}`}>
@@ -46,12 +54,21 @@ export default function PostCard({
               <span className="font-semibold">{author}</span>
               <span>•</span>
               <span>{category}</span>
-              <span>•</span>
-              <span>{timeAgo}</span>
             </div>
           </div>
         </CardHeader>
-        <CardFooter className="flex justify-end">
+        <CardFooter className="flex justify-between items-center">
+          <div className="flex items-center justify-start gap-2 text-sm text-muted-foreground">
+            <div className="flex items-center gap-px">
+              <MessageCircleIcon className="w-4 h-4" />
+              <span>{viewCount}</span>
+            </div>
+            <div className="flex items-center gap-xp">
+              <EyeIcon className="w-4 h-4" />
+              <span>{commentCount}</span>
+            </div>
+            <span>{timeAgo}</span>
+          </div>
           <Button variant="link" className="p-0" asChild>
             <Link
               to={`/community/${id}`}
@@ -64,4 +81,4 @@ export default function PostCard({
       </Card>
     </Link>
   );
-} 
+}
