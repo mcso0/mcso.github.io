@@ -2,6 +2,7 @@ import type { MetaFunction } from "react-router";
 import ProductCard from "~/features/products/components/product-card";
 import PostCard from "~/features/community/components/post-card";
 import IdeaCard from "~/features/ideas/components/idea-card";
+import { JobCard } from "~/features/jobs/components/job-card";
 import { Link } from "react-router";
 import Footer from "../components/page-footer";
 
@@ -105,6 +106,43 @@ export default function Home() {
             likeCount={120}
             isClaimed={index % 2 === 0}
             commentCount={12}
+          />
+        ))}
+      </div>
+      {/* 최근 채용공고 */}
+      {/* Jobs */}
+      <div className="grid grid-cols-3 gap-4">
+        <div className="flex flex-col gap-2">
+          <h2 className="text-4xl font-bold leading-tight tracking-tight">
+            Latest Jobs
+          </h2>
+          <p className="text-xl font-light text-muted-foreground">
+            Find your dream job.
+          </p>
+          <Link
+            to="/jobs"
+            className="inline-flex items-center justify-start p-0 mt-2 text-sm font-medium no-underline text-primary hover:text-primary/80 transition-colors duration-200 underline-offset-4 hover:underline"
+          >
+            Explore all jobs &rarr;
+          </Link>
+        </div>
+        {Array.from({ length: 11 }).map((_, index) => (
+          <JobCard
+            id="apple-software-engineer"
+            company={{
+              name: "Apple",
+              logo: "https://github.com/apple.png",
+            }}
+            title="Software Engineer"
+            postedAt="12 hours ago"
+            employmentType="Full-Time"
+            workType="Remote"
+            salary={{
+              min: 100000,
+              max: 120000,
+              currency: "$",
+            }}
+            location="San Francisco, CA"
           />
         ))}
       </div>
