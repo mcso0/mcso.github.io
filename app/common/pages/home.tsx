@@ -3,8 +3,20 @@ import ProductCard from "~/features/products/components/product-card";
 import PostCard from "~/features/community/components/post-card";
 import IdeaCard from "~/features/ideas/components/idea-card";
 import { JobCard } from "~/features/jobs/components/job-card";
+import { TeamCard } from "~/features/teams/components/team-card";
 import { Link } from "react-router";
 import Footer from "../components/page-footer";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "../components/ui/card";
+import { Button } from "../components/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "../components/ui/avatar";
+import { Badge } from "../components/ui/badge";
 
 // 메타데이터를 정의하는 함수입니다.
 // 이 함수는 웹페이지의 제목과 설명을 설정합니다.
@@ -110,7 +122,6 @@ export default function Home() {
         ))}
       </div>
       {/* 최근 채용공고 */}
-      {/* Jobs */}
       <div className="grid grid-cols-3 gap-4">
         <div className="flex flex-col gap-2">
           <h2 className="text-4xl font-bold leading-tight tracking-tight">
@@ -128,23 +139,111 @@ export default function Home() {
         </div>
         {Array.from({ length: 11 }).map((_, index) => (
           <JobCard
-            id="apple-software-engineer"
-            company={{
-              name: "Apple",
-              logo: "https://github.com/apple.png",
-            }}
+            id="JobId"
+            company="Apple"
+            companyLogoUrl="https://github.com/apple.png"
+            companyHq="San Francisco, CA"
             title="Software Engineer"
             postedAt="12 hours ago"
-            employmentType="Full-Time"
-            workType="Remote"
-            salary={{
-              min: 100000,
-              max: 120000,
-              currency: "$",
-            }}
-            location="San Francisco, CA"
+            type="Full-Time"
+            positionLocation="Remote"
+            salary="$ 100,000 - $ 120,000"
           />
         ))}
+      </div>
+      {/* 팀메이트 찾기 */}
+      <div className="grid grid-cols-3 gap-4">
+        <div className="flex flex-col gap-2">
+          <h2 className="text-4xl font-bold leading-tight tracking-tight">
+            Find your TeamMates
+          </h2>
+          <p className="text-xl font-light text-muted-foreground">
+            Join a team looking for a new member
+          </p>
+          <Link
+            to="/teams"
+            className="inline-flex items-center justify-start p-0 mt-2 text-sm font-medium no-underline text-primary hover:text-primary/80 transition-colors duration-200 underline-offset-4 hover:underline"
+          >
+            Explore all teams &rarr;
+          </Link>
+        </div>
+        <TeamCard
+          id="lynn-social-platform"
+          author={{
+            username: "lynn",
+            avatarUrl: "https://github.com/inthetiger.png",
+            avatarFallback: "L",
+          }}
+          lookingFor={[
+            "React Developer",
+            "Backend Developer",
+            "Product Manager",
+            "UI/UX Designer",
+          ]}
+          projectDescription="a new social media platform"
+        />
+        <TeamCard
+          id="alex-ai-startup"
+          author={{
+            username: "alex",
+            avatarUrl: "https://github.com/octocat.png",
+            avatarFallback: "A",
+          }}
+          lookingFor={["ML Engineer", "Data Scientist", "Full-stack Developer"]}
+          projectDescription="an AI-powered productivity tool"
+        />
+        <TeamCard
+          id="sarah-fintech"
+          author={{
+            username: "sarah",
+            avatarUrl: "https://github.com/defunkt.png",
+            avatarFallback: "S",
+          }}
+          lookingFor={[
+            "Blockchain Developer",
+            "Security Engineer",
+            "Mobile Developer",
+          ]}
+          projectDescription="a decentralized finance platform"
+        />
+        <TeamCard
+          id="mike-gaming"
+          author={{
+            username: "mike",
+            avatarUrl: "https://github.com/mojombo.png",
+            avatarFallback: "M",
+          }}
+          lookingFor={["Game Developer", "3D Artist", "Sound Designer"]}
+          projectDescription="an indie multiplayer game"
+        />
+        <TeamCard
+          id="emma-healthcare"
+          author={{
+            username: "emma",
+            avatarUrl: "https://github.com/pjhyett.png",
+            avatarFallback: "E",
+          }}
+          lookingFor={[
+            "Healthcare Developer",
+            "Medical Advisor",
+            "Compliance Manager",
+          ]}
+          projectDescription="a telemedicine application"
+        />
+        <TeamCard
+          id="david-edtech"
+          author={{
+            username: "david",
+            avatarUrl: "https://github.com/wycats.png",
+            avatarFallback: "D",
+          }}
+          lookingFor={[
+            "Frontend Developer",
+            "Education Specialist",
+            "QA Engineer",
+          ]}
+          projectDescription="an online learning platform"
+        />
       </div>
       <Footer />
     </div>

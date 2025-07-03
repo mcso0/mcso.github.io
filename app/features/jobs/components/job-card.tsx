@@ -12,40 +12,28 @@ import { CircleDollarSignIcon, MapPinIcon, ArrowRightIcon } from "lucide-react";
 
 export interface JobCardProps {
   id: string;
-  company: {
-    name: string;
-    logo: string;
-  };
+  company: string;
+  companyLogoUrl: string;
+  companyHq: string;
   title: string;
   postedAt: string;
-  employmentType: string;
-  workType: string;
-  salary: {
-    min: number;
-    max: number;
-    currency: string;
-  };
-  location: string;
+  type: string;
+  positionLocation: string;
+  salary: string;
   additionalBadges?: string[];
 }
 
 export function JobCard({
   id,
   company,
+  companyLogoUrl,
+  companyHq,
   title,
   postedAt,
-  employmentType,
-  workType,
+  type,
   salary,
-  location,
-  additionalBadges = [],
+  positionLocation,
 }: JobCardProps) {
-  const formatSalary = () => {
-    return `${salary.currency} ${salary.min.toLocaleString()} - ${
-      salary.currency
-    } ${salary.max.toLocaleString()}`;
-  };
-
   return (
     <Link to={`/jobs/${id}`}>
       <Card className="hover:bg-neutral-100 dark:hover:bg-neutral-900 cursor-pointer gap-2 transition-colors duration-200">
@@ -53,12 +41,12 @@ export function JobCard({
           {/* 회사 로고와 회사 이름, 게시일 */}
           <div className="flex items-center gap-2 mb-2">
             <img
-              src={company.logo}
-              alt={`${company.name} Logo`}
+              src={companyLogoUrl}
+              alt={`${company} Logo`}
               className="size-6 rounded-full"
             />
             <div className="space-x-2">
-              <span className="text-accent-foreground">{company.name}</span>
+              <span className="text-accent-foreground">{company}</span>
               <span className="text-xs text-muted-foreground">{postedAt}</span>
             </div>
           </div>
@@ -69,13 +57,8 @@ export function JobCard({
         </CardHeader>
 
         <CardContent className="flex flex-row justify-start items-center gap-2 mb-2">
-          <Badge variant="outline">{employmentType}</Badge>
-          <Badge variant="outline">{workType}</Badge>
-          {additionalBadges.map((badge, index) => (
-            <Badge key={index} variant="outline">
-              {badge}
-            </Badge>
-          ))}
+          <Badge variant="outline">{type}</Badge>
+          <Badge variant="outline">{positionLocation}</Badge>
         </CardContent>
 
         <CardFooter className="flex justify-between items-end gap-2">
@@ -83,13 +66,13 @@ export function JobCard({
             <div className="flex flex-row justify-start items-center gap-2">
               <CircleDollarSignIcon className="size-4 text-muted-foreground" />
               <span className="text-sm font-medium text-muted-foreground">
-                {formatSalary()}
+                {salary}
               </span>
             </div>
             <div className="flex flex-row justify-start items-center gap-2">
               <MapPinIcon className="size-4 text-muted-foreground" />
               <span className="text-sm font-medium text-muted-foreground">
-                {location}
+                {companyHq}
               </span>
             </div>
           </div>
