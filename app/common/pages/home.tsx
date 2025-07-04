@@ -167,83 +167,21 @@ export default function Home() {
             Explore all teams &rarr;
           </Link>
         </div>
-        <TeamCard
-          id="lynn-social-platform"
-          author={{
-            username: "lynn",
-            avatarUrl: "https://github.com/inthetiger.png",
-            avatarFallback: "L",
-          }}
-          lookingFor={[
-            "React Developer",
-            "Backend Developer",
-            "Product Manager",
-            "UI/UX Designer",
-          ]}
-          projectDescription="a new social media platform"
-        />
-        <TeamCard
-          id="alex-ai-startup"
-          author={{
-            username: "alex",
-            avatarUrl: "https://github.com/octocat.png",
-            avatarFallback: "A",
-          }}
-          lookingFor={["ML Engineer", "Data Scientist", "Full-stack Developer"]}
-          projectDescription="an AI-powered productivity tool"
-        />
-        <TeamCard
-          id="sarah-fintech"
-          author={{
-            username: "sarah",
-            avatarUrl: "https://github.com/defunkt.png",
-            avatarFallback: "S",
-          }}
-          lookingFor={[
-            "Blockchain Developer",
-            "Security Engineer",
-            "Mobile Developer",
-          ]}
-          projectDescription="a decentralized finance platform"
-        />
-        <TeamCard
-          id="mike-gaming"
-          author={{
-            username: "mike",
-            avatarUrl: "https://github.com/mojombo.png",
-            avatarFallback: "M",
-          }}
-          lookingFor={["Game Developer", "3D Artist", "Sound Designer"]}
-          projectDescription="an indie multiplayer game"
-        />
-        <TeamCard
-          id="emma-healthcare"
-          author={{
-            username: "emma",
-            avatarUrl: "https://github.com/pjhyett.png",
-            avatarFallback: "E",
-          }}
-          lookingFor={[
-            "Healthcare Developer",
-            "Medical Advisor",
-            "Compliance Manager",
-          ]}
-          projectDescription="a telemedicine application"
-        />
-        <TeamCard
-          id="david-edtech"
-          author={{
-            username: "david",
-            avatarUrl: "https://github.com/wycats.png",
-            avatarFallback: "D",
-          }}
-          lookingFor={[
-            "Frontend Developer",
-            "Education Specialist",
-            "QA Engineer",
-          ]}
-          projectDescription="an online learning platform"
-        />
+        {Array.from({ length: 11 }).map((_, index) => (
+          <TeamCard
+            id="lynn-social-platform"
+            leaderName="Lynn"
+            leaderAvatarUrl="https://github.com/inthetiger.png"
+            leaderAvatarFallback="L"
+            positions={[
+              "React Developer",
+              "Backend Developer",
+              "Product Manager",
+              "UI/UX Designer",
+            ]}
+            projectDescription="a new social media platform"
+          />
+        ))}
       </div>
       <Footer />
     </div>

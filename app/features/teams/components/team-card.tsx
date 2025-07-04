@@ -15,19 +15,19 @@ import {
 
 export interface TeamCardProps {
   id: string;
-  author: {
-    username: string;
-    avatarUrl: string;
-    avatarFallback: string;
-  };
-  lookingFor: string[];
+  leaderName: string;
+  leaderAvatarUrl: string;
+  leaderAvatarFallback: string;
+  positions: string[];
   projectDescription: string;
 }
 
 export function TeamCard({
   id,
-  author,
-  lookingFor,
+  leaderName,
+  leaderAvatarUrl,
+  leaderAvatarFallback,
+  positions,
   projectDescription,
 }: TeamCardProps) {
   return (
@@ -40,17 +40,17 @@ export function TeamCard({
               variant={"secondary"}
               className="inline-flex shadow-sm items-center text-base gap-1"
             >
-              <span>@{author.username}</span>
+              <span>@{leaderName}</span>
               <Avatar className="size-5">
-                <AvatarFallback>{author.avatarFallback}</AvatarFallback>
-                <AvatarImage src={author.avatarUrl} />
+                <AvatarFallback>{leaderAvatarFallback}</AvatarFallback>
+                <AvatarImage src={leaderAvatarUrl} />
               </Avatar>
             </Badge>
 
             <span className="text-base">is looking for</span>
 
             {/* 찾고 있는 역할들 */}
-            {lookingFor.map((role, index) => (
+            {positions.map((role, index) => (
               <Badge key={index} variant={"secondary"} className="text-base">
                 {role}
               </Badge>

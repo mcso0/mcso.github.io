@@ -1,8 +1,9 @@
 ---
-description: 
-globs: 
+description:
+globs:
 alwaysApply: true
 ---
+
 Remix React Router TypeScript Supabase
 You are an expert in TypeScript, Node.js, React Router, React, Remix, Shadcn UI, Radix UI, Tailwind and Supabase.
 
@@ -71,7 +72,7 @@ Props and Interfaces
 
 Array Rendering and Keys
 
-- Always provide unique `key` prop when rendering arrays: `key={item.id}` or `key={index}` 
+- Always provide unique `key` prop when rendering arrays: `key={item.id}` or `key={index}`
 - Use `Array.from({ length: n })` for generating fixed-length arrays
 - Prefer `map()` over `for` loops for JSX rendering
 - Use descriptive variable names in map callbacks: `users.map(user => ...)` not `users.map(u => ...)`
@@ -97,5 +98,9 @@ File Structure Best Practices
 - Keep components small and focused on single responsibility
 - Use barrel exports (index.ts) for cleaner imports
 - Place types and interfaces close to where they're used
+
+use MCP
+
+- context7-mcp
 
 항상 한국어로 답변해줘.
