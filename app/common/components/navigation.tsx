@@ -74,24 +74,24 @@ const menus = [
         // 이를 통해 원격 근무 jobs만 필터링해서 보여줄 수 있습니다.
       },
       {
-        name: "All Jobs",
+        name: "Full-Time Jobs",
         description: "Find a full-time job",
-        to: "/jobs?type=full-time",
+        to: "/jobs?location=fullTieme",
       },
       {
         name: "Freelance Jobs   ",
         description: "Find a freelance job",
-        to: "/jobs?type=freelance",
+        to: "/jobs?location=freelance",
       },
       {
         name: "Internships",
         description: "Find an internship",
-        to: "/jobs?type=internship",
+        to: "/jobs?location=internship",
       },
       {
-        name: "Submit a job",
+        name: "Submit a Job",
         description: "Submit a job to our community",
-        to: "/jobs/submit",
+        to: "jobs/submit",
       },
     ],
   },
