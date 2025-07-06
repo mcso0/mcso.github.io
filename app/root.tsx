@@ -19,6 +19,7 @@ import type { Route } from "./+types/root";
 // 스타일시트 임포트
 import stylesheet from "./app.css?url";
 
+
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
   {

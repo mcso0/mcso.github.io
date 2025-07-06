@@ -1,5 +1,7 @@
 import type { MetaFunction } from "react-router";
 
+// import Earth from "../../../spline/earth";
+
 export const meta: MetaFunction = () => {
   return [
     { title: "jobs | wemake" },
@@ -11,6 +13,7 @@ export default function Jobs() {
   return (
     <div className="px-20 py-20">
       <div className="space-y-8">
+        {/* <Earth className="w-full h-50% absolute hover:cursor-pointer" /> */}
         <div>
           <h1 className="text-4xl font-bold leading-tight tracking-tight">
             Jobs

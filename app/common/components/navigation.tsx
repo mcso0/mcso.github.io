@@ -74,7 +74,7 @@ const menus = [
         // 이를 통해 원격 근무 jobs만 필터링해서 보여줄 수 있습니다.
       },
       {
-        name: "Full-Time Jobs",
+        name: "All Jobs",
         description: "Find a full-time job",
         to: "/jobs?type=full-time",
       },
