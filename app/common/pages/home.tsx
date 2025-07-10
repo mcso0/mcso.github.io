@@ -1,3 +1,4 @@
+import type { Route } from "./+types/home";
 import type { MetaFunction } from "react-router";
 import ProductCard from "~/features/products/components/product-card";
 import PostCard from "~/features/community/components/post-card";
@@ -29,6 +30,7 @@ export const meta: MetaFunction = () => {
     { name: "description", content: "Welcome to wemake" },
   ];
 };
+
 
 export default function Home() {
   return (

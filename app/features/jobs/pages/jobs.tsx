@@ -33,10 +33,10 @@ export default function Jobs() {
           <motion.button
             whileHover={{ scale: 1.2 }}
             whileTap={{ scale: 0.8 }}
-            className="w-fit flex justify-start items-center hover:cursor-pointer mt-8"
+            className="w-fit flex justify-start items-center mt-8"
           >
             <Link to="/jobs/submit">
-              <Button>Move to Submit</Button>
+              <Button className="hover:cursor-pointer">Move to Submit</Button>
             </Link>
           </motion.button>
         </div>

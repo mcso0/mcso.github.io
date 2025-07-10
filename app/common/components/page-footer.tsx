@@ -141,7 +141,7 @@ export default function Footer() {
                 key={social.name}
                 variant="ghost"
                 size="icon"
-                className="text-muted-foreground hover:text-foreground transition-colors duration-200"
+                className="text-muted-foreground hover:text-foreground transition-colors duration-200 cursor-pointer"
               >
                 <a href={social.href} target="_blank" rel="noopener noreferrer">
                   <social.icon className="w-4 h-4" />
