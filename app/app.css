@@ -1,14 +1,12 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-
 @custom-variant dark (&:is(.dark *));
 
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
-
 
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
@@ -118,8 +116,6 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
-
-
 @layer base {
   * {
     @apply border-border;
@@ -127,4 +123,223 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* Fonts */
+
+/* Martian Mono */
+.martian-mono-100 {
+  font-family: "Martian Mono", monospace;
+  font-optical-sizing: auto;
+  font-weight: 100;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
+}
+
+.martian-mono-200 {
+  font-family: "Martian Mono", monospace;
+  font-optical-sizing: auto;
+  font-weight: 200;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
+}
+
+.martian-mono-300 {
+  font-family: "Martian Mono", monospace;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
+}
+
+.martian-mono-400 {
+  font-family: "Martian Mono", monospace;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
+}
+
+.martian-mono-500 {
+  font-family: "Martian Mono", monospace;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
+}
+
+.martian-mono-600 {
+  font-family: "Martian Mono", monospace;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
+}
+
+.martian-mono-700 {
+  font-family: "Martian Mono", monospace;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
+}
+
+.martian-mono-800 {
+  font-family: "Martian Mono", monospace;
+  font-optical-sizing: auto;
+  font-weight: 800;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
+}
+
+/* DM Mono */
+.dm-mono-light {
+  font-family: "DM Mono", monospace;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.dm-mono-regular {
+  font-family: "DM Mono", monospace;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.dm-mono-medium {
+  font-family: "DM Mono", monospace;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.dm-mono-light-italic {
+  font-family: "DM Mono", monospace;
+  font-weight: 300;
+  font-style: italic;
+}
+
+.dm-mono-regular-italic {
+  font-family: "DM Mono", monospace;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.dm-mono-medium-italic {
+  font-family: "DM Mono", monospace;
+  font-weight: 500;
+  font-style: italic;
+}
+
+/* Geologica */
+.geologica-100 {
+  font-family: "Geologica", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 100;
+  font-style: normal;
+  font-variation-settings: "slnt" 0, "CRSV" 0, "SHRP" 0;
+}
+
+.geologica-200 {
+  font-family: "Geologica", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 200;
+  font-style: normal;
+  font-variation-settings: "slnt" 0, "CRSV" 0, "SHRP" 0;
+}
+
+.geologica-300 {
+  font-family: "Geologica", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+  font-variation-settings: "slnt" 0, "CRSV" 0, "SHRP" 0;
+}
+
+.geologica-400 {
+  font-family: "Geologica", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings: "slnt" 0, "CRSV" 0, "SHRP" 0;
+}
+
+.geologica-500 {
+  font-family: "Geologica", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+  font-variation-settings: "slnt" 0, "CRSV" 0, "SHRP" 0;
+}
+
+.geologica-600 {
+  font-family: "Geologica", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+  font-variation-settings: "slnt" 0, "CRSV" 0, "SHRP" 0;
+}
+
+.geologica-700 {
+  font-family: "Geologica", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+  font-variation-settings: "slnt" 0, "CRSV" 0, "SHRP" 0;
+}
+
+.geologica-800 {
+  font-family: "Geologica", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 800;
+  font-style: normal;
+  font-variation-settings: "slnt" 0, "CRSV" 0, "SHRP" 0;
+}
+
+.geologica-900 {
+  font-family: "Geologica", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 900;
+  font-style: normal;
+  font-variation-settings: "slnt" 0, "CRSV" 0, "SHRP" 0;
+}
+
+/* Pixelify Sans */
+.pixelify-sans-400 {
+  font-family: "Pixelify Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.pixelify-sans-500 {
+  font-family: "Pixelify Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.pixelify-sans-600 {
+  font-family: "Pixelify Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.pixelify-sans-700 {
+  font-family: "Pixelify Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* Silkscreen */
+.silkscreen-regular {
+  font-family: "Silkscreen", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.silkscreen-bold {
+  font-family: "Silkscreen", sans-serif;
+  font-weight: 700;
+  font-style: normal;
 }

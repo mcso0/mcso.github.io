@@ -18,6 +18,7 @@ import {
 import { Button } from "../components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "../components/ui/avatar";
 import { Badge } from "../components/ui/badge";
+import { MainBanner } from "../components/main-banner";
 
 // 메타데이터를 정의하는 함수입니다.
 // 이 함수는 웹페이지의 제목과 설명을 설정합니다.
@@ -31,10 +32,10 @@ export const meta: MetaFunction = () => {
   ];
 };
 
-
 export default function Home() {
   return (
     <div className="px-20 space-y-40">
+      <MainBanner />
       {/* 오늘의 제품 */}
       <div className="grid grid-cols-3 gap-4">
         <div className="flex flex-col gap-2">

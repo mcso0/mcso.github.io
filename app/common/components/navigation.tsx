@@ -124,10 +124,15 @@ const menus = [
   },
 ];
 
-export function Navigation() {
-    // isLoggenIn
-
-
+export function Navigation({
+  isLoggedIn,
+  hasNotifications,
+  hasMessages,
+}: {
+  isLoggedIn: boolean;
+  hasNotifications: boolean;
+  hasMessages: boolean;
+}) {
   return (
     <nav
       className="flex px-20 h-16 items-center justify-between
@@ -145,7 +150,9 @@ export function Navigation() {
                 {menu.items ? (
                   <>
                     <Link to={menu.to}>
-                      <NavigationMenuTrigger>{menu.name}</NavigationMenuTrigger>
+                      <NavigationMenuTrigger className="cursor-pointer">
+                        {menu.name}
+                      </NavigationMenuTrigger>
                     </Link>
                     <NavigationMenuContent>
                       <ul className="grid w-[600px] font-light gap-3 p-4 grid-cols-2">

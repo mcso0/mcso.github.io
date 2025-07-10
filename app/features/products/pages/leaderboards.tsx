@@ -3,9 +3,11 @@ import PageHero from "~/common/components/page-hero";
 import { Link } from "react-router";
 import ProductCard from "../components/product-card";
 import { Button } from "~/common/components/ui/button";
+import Footer from "~/common/components/page-footer";
 
 export const meta: Route.MetaFunction = () => {
-  return [{ title: "Leaderboards | wemake" },
+  return [
+    { title: "Leaderboards | wemake" },
     { name: "description", content: "Top product leaderboards" },
   ];
 };
@@ -13,14 +15,14 @@ export const meta: Route.MetaFunction = () => {
 export default function Leaderboards() {
   return (
     <div className="space-y-20">
-    <PageHero
-      title="Leaderboards"
-      subtitle="See the top performing products in our community"
-      className=""
-    />
+      <PageHero
+        title="Leaderboards"
+        subtitle="See the top performing products in our community"
+        className=""
+      />
 
-    {/* All Time Leaderboard */}
-    <div className="grid grid-cols-3 gap-4">
+      {/* All Time Leaderboard */}
+      <div className="grid grid-cols-3 gap-4">
         <div className="flex flex-col gap-2">
           <h2 className="text-3xl font-bold leading-tight tracking-tight">
             All Time Leaderboard
@@ -42,14 +44,14 @@ export default function Leaderboards() {
           />
         ))}
         <Button variant="link" asChild className="!text-primary self-center">
-            <Link to={"/products/leaderboards/yearly"}>
-              Explore all products &rarr;
-            </Link>
-          </Button>
+          <Link to={"/products/leaderboards/yearly"}>
+            Explore all products &rarr;
+          </Link>
+        </Button>
       </div>
 
-    {/* Daily Leaderboard */}
-    <div className="grid grid-cols-3 gap-4">
+      {/* Daily Leaderboard */}
+      <div className="grid grid-cols-3 gap-4">
         <div className="flex flex-col gap-2">
           <h2 className="text-3xl font-bold leading-tight tracking-tight">
             Daily Leaderboard
@@ -71,10 +73,10 @@ export default function Leaderboards() {
           />
         ))}
         <Button variant="link" asChild className="!text-primary self-center">
-            <Link to={"/products/leaderboards/daily"}>
-              Explore all products &rarr;
-            </Link>
-          </Button>
+          <Link to={"/products/leaderboards/daily"}>
+            Explore all products &rarr;
+          </Link>
+        </Button>
       </div>
 
       {/* Weekly Leaderboard */}
@@ -100,10 +102,10 @@ export default function Leaderboards() {
           />
         ))}
         <Button variant="link" asChild className="!text-primary self-center">
-            <Link to={"/products/leaderboards/weekly"}>
-              Explore all products &rarr;
-            </Link>
-          </Button>
+          <Link to={"/products/leaderboards/weekly"}>
+            Explore all products &rarr;
+          </Link>
+        </Button>
       </div>
 
       {/* Monthly Leaderboard */}
@@ -129,14 +131,12 @@ export default function Leaderboards() {
           />
         ))}
         <Button variant="link" asChild className="!text-primary self-center">
-            <Link to={"/products/leaderboards/monthly"}>
-              Explore all products &rarr;
-            </Link>
-          </Button>
+          <Link to={"/products/leaderboards/monthly"}>
+            Explore all products &rarr;
+          </Link>
+        </Button>
       </div>
-
+      <Footer />
     </div>
   );
 }
-
-

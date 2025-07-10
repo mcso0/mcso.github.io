@@ -19,7 +19,6 @@ import type { Route } from "./+types/root";
 // 스타일시트 임포트
 import stylesheet from "./app.css?url";
 
-
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
   {
@@ -32,6 +31,19 @@ export const links: Route.LinksFunction = () => [
     href: "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap",
   },
   { rel: "stylesheet", href: stylesheet },
+  {
+    rel: "preconnect",
+    href: "https://fonts.googleapis.com",
+  },
+  {
+    rel: "preconnect",
+    href: "https://fonts.gstatic.com",
+    crossOrigin: "anonymous",
+  },
+  {
+    rel: "stylesheet",
+    href: "https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Geologica:wght@100..900&family=Martian+Mono:wght@100..800&family=Pixelify+Sans:wght@400..700&family=Silkscreen:wght@400;700&display=swap",
+  },
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
@@ -44,9 +56,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        <main className="py-28">
-          {children}
-        </main>
+        <main className="py-28">{children}</main>
         <ScrollRestoration />
         <Scripts />
       </body>
