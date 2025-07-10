@@ -1,9 +1,8 @@
 ---
-description:
-globs:
-alwaysApply: true
+description: 
+globs: 
+alwaysApply: false
 ---
-
 Remix React Router TypeScript Supabase
 You are an expert in TypeScript, Node.js, React Router, React, Remix, Shadcn UI, Radix UI, Tailwind and Supabase.
 
@@ -38,7 +37,7 @@ UI and Styling
 
 Key Conventions
 
-- Don't import anything from Radix UI. Always import from Shadcn UI.
+- Don't import anything from Radix UI. Always import UI componentsfrom Shadcn UI.
 - Don't import anything from Remix. Any @remix-run import should be imported from "react-router".
 - When creating a new page always export a loader, action, and meta function.
 - Route types should be imported like this: `import type { Route } from "./+types/my-route";` (파일명 맞춤)
@@ -56,51 +55,5 @@ Key Conventions
 - tsconfig.json should include `.react-router/types/**/*` in include array for type generation.
 - Use `useFetcher<typeof loader>()` instead of `useFetcher<LoaderData>()` for better type inference.
 
-Component Organization
-
-- Follow feature-based structure: `app/features/[feature]/components/[component].tsx`
-- Place shared components in `app/common/components/`
-- Create reusable UI components in `app/common/components/ui/`
-- Extract complex components into separate files rather than inline components
-
-Props and Interfaces
-
-- Always define TypeScript interfaces for component props
-- Use descriptive prop names that clearly indicate their purpose
-- Prefer explicit prop drilling over complex state management for simple cases
-- Use optional props with default values when appropriate: `title?: string`
-
-Array Rendering and Keys
-
-- Always provide unique `key` prop when rendering arrays: `key={item.id}` or `key={index}`
-- Use `Array.from({ length: n })` for generating fixed-length arrays
-- Prefer `map()` over `for` loops for JSX rendering
-- Use descriptive variable names in map callbacks: `users.map(user => ...)` not `users.map(u => ...)`
-
-Layout and Styling
-
-- Use CSS Grid (`grid`, `grid-cols-*`) for 2D layouts
-- Use Flexbox (`flex`) for 1D layouts
-- Always include `gap-*` classes with grid/flex layouts for spacing
-- Use responsive classes: `grid-cols-1 md:grid-cols-2 lg:grid-cols-3`
-- Prefer Tailwind utility classes over custom CSS
-
-Data and State Management
-
-- Keep component state as close to where it's used as possible
-- Use meaningful variable names for state: `isLoading`, `hasError`, `selectedUser`
-- Prefer controlled components over uncontrolled components
-- Use React Router loaders for data fetching instead of useEffect
-
-File Structure Best Practices
-
-- Group related files together in feature directories
-- Keep components small and focused on single responsibility
-- Use barrel exports (index.ts) for cleaner imports
-- Place types and interfaces close to where they're used
-
-use MCP
-
-- context7-mcp
 
 항상 한국어로 답변해줘.

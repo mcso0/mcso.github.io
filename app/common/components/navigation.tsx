@@ -9,25 +9,6 @@ import {
   NavigationMenuContent,
   navigationMenuTriggerStyle,
 } from "./ui/navigation-menu";
-import { Button } from "./ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuGroup,
-} from "./ui/dropdown-menu";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import { DropdownMenuTrigger, DropdownMenuItem } from "./ui/dropdown-menu";
-import {
-  SquareKanban,
-  SettingsIcon,
-  UserIcon,
-  LogOutIcon,
-  Menu,
-  BellIcon,
-  MessageCircleIcon,
-} from "lucide-react";
 
 const menus = [
   {
@@ -76,22 +57,22 @@ const menus = [
       {
         name: "Full-Time Jobs",
         description: "Find a full-time job",
-        to: "/jobs?location=fullTieme",
+        to: "/jobs?type=full-time",
       },
       {
         name: "Freelance Jobs   ",
         description: "Find a freelance job",
-        to: "/jobs?location=freelance",
+        to: "/jobs?type=freelance",
       },
       {
         name: "Internships",
         description: "Find an internship",
-        to: "/jobs?location=internship",
+        to: "/jobs?type=internship",
       },
       {
-        name: "Submit a Job",
+        name: "Submit a job",
         description: "Submit a job to our community",
-        to: "jobs/submit",
+        to: "/jobs/submit",
       },
     ],
   },
@@ -143,25 +124,17 @@ const menus = [
   },
 ];
 
-export function Navigation({
-  isLoggedIn,
-  hasNotifications,
-  hasMessages,
-}: {
-  isLoggedIn: boolean;
-  hasNotifications: boolean;
-  hasMessages: boolean;
-}) {
+export function Navigation() {
+    // isLoggenIn
+
+
   return (
     <nav
       className="flex px-20 h-16 items-center justify-between
     backdrop-blur fixed top-0 left-0 right-0 z-50 bg-background/50"
     >
       <div className="flex items-center gap-4">
-        <Link
-          to="/"
-          className="font-bold text-lg tracking-tight text-black dark:text-white"
-        >
+        <Link to="/" className="font-bold text-lg tracking-tight text-primary">
           wemake
         </Link>
         <div className="w-px h-6 mx-4 bg-gray-600/50"></div>
@@ -172,9 +145,7 @@ export function Navigation({
                 {menu.items ? (
                   <>
                     <Link to={menu.to}>
-                      <NavigationMenuTrigger className="cursor-pointer">
-                        {menu.name}
-                      </NavigationMenuTrigger>
+                      <NavigationMenuTrigger>{menu.name}</NavigationMenuTrigger>
                     </Link>
                     <NavigationMenuContent>
                       <ul className="grid w-[600px] font-light gap-3 p-4 grid-cols-2">
@@ -208,83 +179,6 @@ export function Navigation({
           </NavigationMenuList>
         </NavigationMenu>
       </div>
-      {isLoggedIn ? (
-        <div className="flex items-center gap-4">
-          <Button size="icon" variant="ghost" asChild className="relative">
-            <Link to="/my/notifications">
-              <BellIcon className="size-5" />
-              {hasNotifications && (
-                <span className="absolute top-1 right-1 bg-red-500 rounded-full w-2 h-2">
-                  {hasNotifications}
-                </span>
-              )}
-            </Link>
-          </Button>
-          <Button size="icon" variant="ghost" asChild className="relative">
-            <Link to="/my/messages">
-              <MessageCircleIcon className="size-5" />
-              {hasMessages && (
-                <span className="absolute top-1 right-1 bg-red-500 rounded-full w-2 h-2">
-                  {hasMessages}
-                </span>
-              )}
-            </Link>
-          </Button>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Avatar className="w-8 h-8 cursor-pointer">
-                <AvatarImage src="https://github.com/shadcn.png" />
-                <AvatarFallback>
-                  <UserIcon className="w-4 h-4" />
-                </AvatarFallback>
-              </Avatar>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-56" align="end">
-              <DropdownMenuLabel className="flex flex-col cursor-pointer gap-0.4">
-                <span className="font-medium">Deny</span>
-                <span className="text-xs text-muted-foreground">@username</span>
-              </DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuGroup>
-                <DropdownMenuItem className="cursor-pointer" asChild>
-                  <Link to="/my/dashboard">
-                    <SquareKanban className="size-4" />
-                    Dashboard
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem className="cursor-pointer" asChild>
-                  <Link to="/my/profile">
-                    <UserIcon className="size-4" />
-                    Profile
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem className="cursor-pointer" asChild>
-                  <Link to="/my/settings">
-                    <SettingsIcon className="size-4" />
-                    Settings
-                  </Link>
-                </DropdownMenuItem>
-              </DropdownMenuGroup>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem className="cursor-pointer" asChild>
-                <Link to="/auth/logout">
-                  <LogOutIcon className="size-4" />
-                  Logout
-                </Link>
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>
-      ) : (
-        <div className="flex items-center gap-4">
-          <Button variant="outline" asChild>
-            <Link to="/auth/login">Login</Link>
-          </Button>
-          <Button variant="default" asChild className="primary">
-            <Link to="/auth/join">Join</Link>
-          </Button>
-        </div>
-      )}
     </nav>
   );
 }

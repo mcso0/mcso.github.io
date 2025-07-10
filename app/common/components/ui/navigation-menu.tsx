@@ -1,9 +1,9 @@
-import * as React from "react";
-import * as NavigationMenuPrimitive from "@radix-ui/react-navigation-menu";
-import { cva } from "class-variance-authority";
-import { ChevronDownIcon } from "lucide-react";
+import * as React from "react"
+import * as NavigationMenuPrimitive from "@radix-ui/react-navigation-menu"
+import { cva } from "class-variance-authority"
+import { ChevronDownIcon } from "lucide-react"
 
-import { cn } from "~/lib/utils";
+import { cn } from "~/lib/utils"
 
 function NavigationMenu({
   className,
@@ -11,7 +11,7 @@ function NavigationMenu({
   viewport = true,
   ...props
 }: React.ComponentProps<typeof NavigationMenuPrimitive.Root> & {
-  viewport?: boolean;
+  viewport?: boolean
 }) {
   return (
     <NavigationMenuPrimitive.Root
@@ -26,7 +26,7 @@ function NavigationMenu({
       {children}
       {viewport && <NavigationMenuViewport />}
     </NavigationMenuPrimitive.Root>
-  );
+  )
 }
 
 function NavigationMenuList({
@@ -42,7 +42,7 @@ function NavigationMenuList({
       )}
       {...props}
     />
-  );
+  )
 }
 
 function NavigationMenuItem({
@@ -55,12 +55,12 @@ function NavigationMenuItem({
       className={cn("relative", className)}
       {...props}
     />
-  );
+  )
 }
 
 const navigationMenuTriggerStyle = cva(
-  "group inline-flex h-9 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium hover:bg-neutral-100 hover:text-neutral-900 focus:bg-neutral-100 focus:text-neutral-900 disabled:pointer-events-none disabled:opacity-50 data-[state=open]:hover:bg-neutral-100 data-[state=open]:text-neutral-900 data-[state=open]:focus:bg-neutral-100 data-[state=open]:bg-neutral-100/50 focus-visible:ring-neutral-950/50 outline-none transition-[color,box-shadow] focus-visible:ring-[3px] focus-visible:outline-1 dark:bg-transparent dark:hover:bg-neutral-800 dark:hover:text-neutral-50 dark:focus:bg-neutral-800 dark:focus:text-neutral-50 dark:data-[state=open]:hover:bg-neutral-800 dark:data-[state=open]:text-neutral-50 dark:data-[state=open]:focus:bg-neutral-800 dark:data-[state=open]:bg-neutral-800/50 dark:focus-visible:ring-neutral-300/50"
-);
+  "group inline-flex h-9 w-max items-center justify-center rounded-md bg-white px-4 py-2 text-sm font-medium hover:bg-neutral-100 hover:text-neutral-900 focus:bg-neutral-100 focus:text-neutral-900 disabled:pointer-events-none disabled:opacity-50 data-[state=open]:hover:bg-neutral-100 data-[state=open]:text-neutral-900 data-[state=open]:focus:bg-neutral-100 data-[state=open]:bg-neutral-100/50 focus-visible:ring-neutral-950/50 outline-none transition-[color,box-shadow] focus-visible:ring-[3px] focus-visible:outline-1 dark:bg-neutral-950 dark:hover:bg-neutral-800 dark:hover:text-neutral-50 dark:focus:bg-neutral-800 dark:focus:text-neutral-50 dark:data-[state=open]:hover:bg-neutral-800 dark:data-[state=open]:text-neutral-50 dark:data-[state=open]:focus:bg-neutral-800 dark:data-[state=open]:bg-neutral-800/50 dark:focus-visible:ring-neutral-300/50"
+)
 
 function NavigationMenuTrigger({
   className,
@@ -73,14 +73,13 @@ function NavigationMenuTrigger({
       className={cn(navigationMenuTriggerStyle(), "group", className)}
       {...props}
     >
-      {children}
-      {""}
+      {children}{""}
       <ChevronDownIcon
         className="relative top-[1px] ml-1 size-3 transition duration-300 group-data-[state=open]:rotate-180"
         aria-hidden="true"
       />
     </NavigationMenuPrimitive.Trigger>
-  );
+  )
 }
 
 function NavigationMenuContent({
@@ -97,7 +96,7 @@ function NavigationMenuContent({
       )}
       {...props}
     />
-  );
+  )
 }
 
 function NavigationMenuViewport({
@@ -119,7 +118,7 @@ function NavigationMenuViewport({
         {...props}
       />
     </div>
-  );
+  )
 }
 
 function NavigationMenuLink({
@@ -135,7 +134,7 @@ function NavigationMenuLink({
       )}
       {...props}
     />
-  );
+  )
 }
 
 function NavigationMenuIndicator({
@@ -153,7 +152,7 @@ function NavigationMenuIndicator({
     >
       <div className="bg-neutral-200 relative top-[60%] h-2 w-2 rotate-45 rounded-tl-sm shadow-md dark:bg-neutral-800" />
     </NavigationMenuPrimitive.Indicator>
-  );
+  )
 }
 
 export {
@@ -166,4 +165,4 @@ export {
   NavigationMenuIndicator,
   NavigationMenuViewport,
   navigationMenuTriggerStyle,
-};
+}
