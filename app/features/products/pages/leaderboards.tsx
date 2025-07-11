@@ -21,14 +21,14 @@ export default function Leaderboards() {
         className=""
       />
 
-      {/* All Time Leaderboard */}
+      {/* Yearly Leaderboard */}
       <div className="grid grid-cols-3 gap-4">
         <div className="flex flex-col gap-2">
           <h2 className="text-3xl font-bold leading-tight tracking-tight">
-            All Time Leaderboard
+            Yearly Leaderboard
           </h2>
           <p className="text-xl font-light text-muted-foreground">
-            The most popular products on wemake by all time
+            The most popular products on wemake by year
           </p>
         </div>
         {Array.from({ length: 7 }).map((_, index) => (

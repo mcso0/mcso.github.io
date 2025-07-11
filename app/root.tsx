@@ -18,6 +18,7 @@ import type { Route } from "./+types/root";
 
 // 스타일시트 임포트
 import stylesheet from "./app.css?url";
+import { Settings } from "luxon";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -47,6 +48,8 @@ export const links: Route.LinksFunction = () => [
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
+  Settings.defaultLocale = "ko";
+  Settings.defaultZone = "Asia/Seoul";
   return (
     <html lang="en" className="dark">
       <head>
@@ -67,11 +70,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 export default function App() {
   return (
     <div className="px-20">
-      <Navigation
-        isLoggedIn={false}
-        hasNotifications={false}
-        hasMessages={false}
-      />
+      <Navigation />
       <Outlet />
     </div>
   );

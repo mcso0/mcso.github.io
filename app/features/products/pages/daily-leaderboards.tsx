@@ -1,59 +1,79 @@
-import type { MetaFunction } from "react-router";
+import type { Route } from "./+types/daily-leaderboards";
+import { DateTime } from "luxon";
+import { data, isRouteErrorResponse } from "react-router";
+import * as z from "zod";
+import PageHero from "~/common/components/page-hero";
 
-export const meta: MetaFunction = () => {
-  return [
-    { title: "Daily Leaderboards | wemake" },
-    { name: "description", content: "Top performing products daily" },
-  ];
+const paramsSchema = z.object({
+  year: z.coerce.number(),
+  month: z.coerce.number(),
+  day: z.coerce.number(),
+});
+
+export const meta: Route.MetaFunction = () => {
+  return [{ title: "Daily Leaderboards | wemake" }];
 };
 
-export function loader() {
+export const loader = ({ params }: Route.LoaderArgs) => {
+  const { success, data: parsedDate } = paramsSchema.safeParse(params);
+  if (!success) {
+    throw data(
+      {
+        error_code: "INVALID_PARAMS",
+        error_message: "Invalid date format",
+      },
+      { status: 400 }
+    );
+  }
+  const date = DateTime.fromObject(parsedDate).setZone("Asia/Seoul");
+  if (!date.isValid) {
+    throw data(
+      {
+        error_code: "INVALID_DATE",
+        error_message: "Invalid date",
+      },
+      { status: 400 }
+    );
+  }
+  const today = DateTime.now().setZone("Asia/Seoul").startOf("day");
+  if (date > today) {
+    throw data(
+      {
+        error_code: "FUTURE_DATE",
+        error_message: "Future date",
+      },
+      { status: 400 }
+    );
+  }
   return {
-    year: "2024",
-    month: "12",
-    day: "13",
-    products: [
-      { id: 1, name: "Product A", score: 120, rank: 1 },
-      { id: 2, name: "Product B", score: 98, rank: 2 },
-      { id: 3, name: "Product C", score: 87, rank: 3 },
-    ],
+    ...parsedDate,
   };
-}
+};
 
-export default function DailyLeaderboards() {
-  const year = "2024";
-  const month = "12";
-  const day = "13";
-  const products = [
-    { id: 1, name: "Product A", score: 120, rank: 1 },
-    { id: 2, name: "Product B", score: 98, rank: 2 },
-    { id: 3, name: "Product C", score: 87, rank: 3 },
-  ];
-
+export default function DailyLeaderboards({
+  loaderData,
+}: Route.ComponentProps) {
+  const date = DateTime.fromObject(loaderData);
   return (
-    <div className="px-20 py-20">
-      <div className="space-y-8">
-        <div>
-          <h1 className="text-4xl font-bold leading-tight tracking-tight">
-            {year}/{month}/{day} Daily Leaderboards
-          </h1>
-          <p className="text-xl font-light text-muted-foreground">
-            Top performing products on {year}/{month}/{day}
-          </p>
-        </div>
-        
-        <div className="space-y-4">
-          {products.map((product) => (
-            <div key={product.id} className="flex items-center justify-between p-4 border rounded-lg">
-              <div className="flex items-center space-x-4">
-                <span className="text-2xl font-bold">#{product.rank}</span>
-                <span className="text-lg">{product.name}</span>
-              </div>
-              <span className="text-lg font-semibold">{product.score.toLocaleString()} pts</span>
-            </div>
-          ))}
-        </div>
-      </div>
+    <div>
+      <PageHero
+        title={"The best of today's products"}
+        subtitle={`Today's products for ${date.year}-${date.month}-${date.day}`}
+      />
     </div>
   );
-} 
+}
+
+export const ErrorBoundary = ({ error }: Route.ErrorBoundaryProps) => {
+  if (isRouteErrorResponse(error)) {
+    return (
+      <div>
+        {error.data.message} / {error.data.error_code}
+      </div>
+    );
+  }
+  if (error instanceof Error) {
+    return <div>{error.message}</div>;
+  }
+  return <div>Unknown errorr</div>;
+};

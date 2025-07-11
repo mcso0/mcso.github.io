@@ -124,15 +124,7 @@ const menus = [
   },
 ];
 
-export function Navigation({
-  isLoggedIn,
-  hasNotifications,
-  hasMessages,
-}: {
-  isLoggedIn: boolean;
-  hasNotifications: boolean;
-  hasMessages: boolean;
-}) {
+export function Navigation() {
   return (
     <nav
       className="flex px-20 h-16 items-center justify-between
