@@ -34,7 +34,7 @@ export const meta: MetaFunction = () => {
 
 export default function Home() {
   return (
-    <div className="px-20 space-y-40">
+    <div className="space-y-40">
       <MainBanner />
       {/* 오늘의 제품 */}
       <div className="grid grid-cols-3 gap-4">
