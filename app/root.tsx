@@ -68,9 +68,17 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
+  const isLoggedIn = false;
+  const hasNotifications = false;
+  const hasMessages = false;
+
   return (
     <div className="px-20">
-      <Navigation />
+      <Navigation
+        isLoggedIn={isLoggedIn}
+        hasNotifications={hasNotifications}
+        hasMessages={hasMessages}
+      />
       <Outlet />
     </div>
   );

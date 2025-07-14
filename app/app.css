@@ -3,6 +3,18 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* 드롭다운 메뉴 트리거의 포커스 아웃라인 제거 */
+[data-slot="dropdown-menu-trigger"] {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* 마우스 클릭 시에만 포커스 아웃라인 제거 (접근성 친화적) */
+*:focus:not(:focus-visible) {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";

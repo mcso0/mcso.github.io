@@ -9,6 +9,32 @@ import {
   NavigationMenuContent,
   navigationMenuTriggerStyle,
 } from "./ui/navigation-menu";
+import { Button } from "./ui/button";
+import { Avatar } from "./ui/avatar";
+import { AvatarImage } from "./ui/avatar";
+import { AvatarFallback } from "./ui/avatar";
+import {
+  MessageCircle,
+  Bell,
+  BarChart3Icon,
+  SettingsIcon,
+  LogOutIcon,
+  UserIcon,
+  MessageCircleIcon,
+  BellIcon,
+  BadgeIcon,
+} from "lucide-react";
+import { Badge } from "./ui/badge";
+// 드롭다운 메뉴 관련 컴포넌트 한 줄로 정리
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuGroup,
+  DropdownMenuSeparator,
+} from "./ui/dropdown-menu";
 
 const menus = [
   {
@@ -124,7 +150,15 @@ const menus = [
   },
 ];
 
-export function Navigation() {
+export function Navigation({
+  isLoggedIn,
+  hasNotifications,
+  hasMessages,
+}: {
+  isLoggedIn: boolean;
+  hasNotifications: boolean;
+  hasMessages: boolean;
+}) {
   return (
     <nav
       className="flex px-20 h-16 items-center justify-between
@@ -178,6 +212,110 @@ export function Navigation() {
           </NavigationMenuList>
         </NavigationMenu>
       </div>
+
+      {isLoggedIn ? (
+        <div className="flex items-center gap-1">
+          <Button
+            variant="ghost"
+            size="icon"
+            className="relative mr-2 cursor-pointer asChild"
+          >
+            <Link to="/my/notifications">
+              <BellIcon className="size-4" />
+              {hasNotifications && (
+                <Badge className="absolute top-1 right-1 size-2 rounded-full p-0 !bg-red-500">
+                  <BadgeIcon className="size-1" />
+                </Badge>
+              )}
+            </Link>
+          </Button>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="relative mr-2 cursor-pointer asChild"
+          >
+            <Link to="/my/messages">
+              <MessageCircleIcon className="size-4" />
+              {hasMessages ? (
+                <Badge className="absolute top-1 right-1 size-2 rounded-full p-0 !bg-red-500">
+                  <BadgeIcon className="size-1" />
+                </Badge>
+              ) : null}
+            </Link>
+          </Button>
+          <DropdownMenu>
+            <DropdownMenuTrigger className="cursor-pointer">
+              <Avatar className="hover:scale-110 transition-all duration-300">
+                <AvatarImage src="https://github.com/inthetiger.png" />
+                <AvatarFallback>L</AvatarFallback>
+              </Avatar>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuLabel className="py-2 w-48 flex flex-col gap-1 ">
+                <span className="text-sm font-medium leading-none">
+                  John Doe
+                </span>
+                <p className="text-sm leading-snug text-muted-foreground">
+                  @email.com
+                </p>
+              </DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuGroup>
+                <DropdownMenuItem>
+                  <Link
+                    to="/my/dashboard"
+                    className="w-full flex flex-row items-center py-1 cursor-pointer"
+                  >
+                    <BarChart3Icon className="size-4 mr-2 text-primary" />
+                    Dashboard
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Link
+                    to="/my/profile"
+                    className="w-full flex flex-row items-center py-1 cursor-pointer"
+                  >
+                    <UserIcon className="size-4 mr-2 text-primary" />
+                    Profile
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Link
+                    to="/my/settings"
+                    className="w-full flex flex-row items-center py-1 cursor-pointer"
+                  >
+                    <SettingsIcon className="size-4 mr-2 text-primary" />
+                    Settings
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem>
+                  <Link
+                    to="/auth/logout"
+                    className="w-full flex flex-row items-center py-1 cursor-pointer"
+                  >
+                    <LogOutIcon className="size-4 mr-2 text-primary" />
+                    Logout
+                  </Link>
+                </DropdownMenuItem>
+              </DropdownMenuGroup>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
+      ) : (
+        <div className="flex items-center gap-4">
+          <Button asChild variant="ghost">
+            <Link to="/login" className="cursor-pointer">
+              Login
+            </Link>
+          </Button>
+          <Button asChild variant="default">
+            <Link to="/join" className="cursor-pointer">
+              Join
+            </Link>
+          </Button>
+        </div>
+      )}
     </nav>
   );
 }
