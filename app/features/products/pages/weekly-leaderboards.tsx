@@ -13,8 +13,12 @@ const paramsSchema = z.object({
   week: z.coerce.number(),
 });
 
-export const meta: Route.MetaFunction = () => {
-  return [{ title: "Weekly Leaderboards | wemake" }];
+export const meta: Route.MetaFunction = ({ params }) => {
+  const date = DateTime.fromObject({
+    weekYear: Number(params.year),
+    weekNumber: Number(params.week),
+  }).setZone("Asia/Seoul").setLocale("ko");
+  return [{ title: `Best of week ${date.startOf("week").toFormat("yy.MM.dd")} - ${date.endOf("week").toFormat("MM.dd")} | wemake` }];
 };
 
 export const loader = ({ params }: Route.LoaderArgs) => {
@@ -41,7 +45,7 @@ export const loader = ({ params }: Route.LoaderArgs) => {
       { status: 400 }
     );
   }
-  const today = DateTime.now().setZone("Asia/Seoul").startOf("day");
+  const today = DateTime.now().setZone("Asia/Seoul").startOf("week");
   if (date > today) {
     throw data(
       {
@@ -60,42 +64,39 @@ export default function WeeklyLeaderboards({
   loaderData,
 }: Route.ComponentProps) {
   const urlDate = DateTime.fromObject({
-    year: loaderData.year,
-    month: loaderData.month,
-    day: loaderData.day,
+    weekYear: loaderData.year,
+    weekNumber: loaderData.week,
   });
-  const previousDay = urlDate.minus({ days: 1 });
-  const nextDay = urlDate.plus({ days: 1 });
-  const isToday = urlDate.equals(
-    DateTime.now().setZone("Asia/Seoul").startOf("day")
+  const previousWeek = urlDate.minus({ weeks: 1 });
+  const nextWeek = urlDate.plus({ weeks: 1 });
+  const isThisWeek = urlDate.equals(
+    DateTime.now().setZone("Asia/Seoul").startOf("week")
   );
   return (
     <div className="space-y-10">
       <PageHero
-        title={`The best products of ${urlDate.toLocaleString(
-          DateTime.DATE_FULL
-        )}`}
-        subtitle={``}
+        title={`Best of Week ${urlDate.startOf("week").toFormat("yy.MM.dd")} - ${urlDate.endOf("week").toFormat("MM.dd")}`}
+        subtitle={`See the best products of the week`}
       />
       <div className="flex items-center gap-2 justify-center">
         <Button variant="secondary" asChild className="px-4">
           <Link
-            to={`/products/leaderboards/daily/${previousDay.year}/${previousDay.month}/${previousDay.day}`}
+            to={`/products/leaderboards/weekly/${previousWeek.year}/${previousWeek.weekNumber}`}
           >
-            &larr; {previousDay.toFormat("yy.MM.dd")}
+            &larr; {previousWeek.toFormat("yy.MM.dd")}
           </Link>
         </Button>
-        {!isToday ? (
+        {!isThisWeek ? (
           <Button variant="secondary" asChild>
             <Link
-              to={`/products/leaderboards/daily/${nextDay.year}/${nextDay.month}/${nextDay.day}`}
+              to={`/products/leaderboards/weekly/${nextWeek.year}/${nextWeek.weekNumber}`}
             >
-              {nextDay.toFormat("yy.MM.dd")} &rarr;
+              {nextWeek.toFormat("yy.MM.dd")} &rarr;
             </Link>
           </Button>
         ) : (
           <Button variant="secondary" disabled>
-            {nextDay.toFormat("yy.MM.dd")} &rarr;
+            {nextWeek.toFormat("yy.MM.dd")} &rarr;
           </Button>
         )}
       </div>

@@ -1,47 +1,68 @@
-import type { MetaFunction } from "react-router";
+import type { Route } from "./+types/search";
+import * as z from "zod";
+import { data, Form } from "react-router";
+import PageHero from "~/common/components/page-hero";
+import ProductCard from "../components/product-card";
+import ProductPagination from "~/common/components/product-pagination";
+import { Input } from "~/common/components/ui/input";
+import { Button } from "~/common/components/ui/button";
 
-export const meta: MetaFunction = () => {
-  return [
-    { title: "Search Products | wemake" },
+export const meta: Route.MetaFunction = () => {
+  return [{ title: `Search products | wemake` },
     {
       name: "description",
-      content: "Search for products in the wemake community",
+      content: "Search for products",
     },
   ];
 }
 
-export function loader() {
-  return {
-    searchQuery: "",
-    results: [],
+const paramsSchema = z.object({
+  query: z.string().optional().default(""),
+  page: z.coerce.number().optional().default(1),
+});
+
+
+export function loader({ request }: Route.LoaderArgs) {
+  const url = new URL(request.url);
+  const { success, data: parsedParams } = paramsSchema.safeParse(
+    Object.fromEntries(url.searchParams)
+  )
+  if (!success) {
+    throw new Error("Invalid parameters");
   };
 }
 
-export default function Search() {
+export default function Search({ loaderData }: Route.ComponentProps) {
   return (
-    <div className="px-20 py-20">
-      <div className="space-y-8">
-        <div>
-          <h1 className="text-4xl font-bold leading-tight tracking-tight">
-            Search Products
-          </h1>
-          <p className="text-xl font-light text-muted-foreground">
-            Find the perfect product for your needs
-          </p>
-        </div>
-
-        <div className="max-w-2xl mx-auto">
-          <input
-            type="search"
-            placeholder="Search products..."
-            className="w-full px-4 py-3 text-lg border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+    <div className="space-y-10">
+      <PageHero
+        title="Search"
+        subtitle="Search for products by title or description"
+      />
+      <Form className="flex gap-4 justify-center max-w-screen-sm mx-auto items-center">
+        <Input
+          name="query"
+          placeholder="Search for products"
+          className="h-10 w-full text-base"
+        />
+        <Button type="submit" className="h-10">Search</Button>
+      </Form>
+       <div className="space-y-10 w-full max-w-screen-md mx-auto">
+        {Array.from({ length: 11 }).map((_, index) => (
+          <ProductCard
+            key={`product-${index + 1}`}
+            id={`product-${index + 1}`}
+            name={`Product ${index + 1}`}
+            description={`Product description ${index + 1}`}
+            commentCount={12}
+            viewCount={12}
+            likeCount={12}
+            upvoteCount={120}
           />
-        </div>
-
-        <div className="text-center text-muted-foreground">
-          Start typing to search for products
-        </div>
+        ))}
       </div>
+
+      <ProductPagination totalPages={10} />
     </div>
   );
 }

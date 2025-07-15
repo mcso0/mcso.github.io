@@ -36,6 +36,17 @@ import { Button } from "~/common/components/ui/button";
 import { Link } from "react-router";
 import ProductPagination from "~/common/components/product-pagination";
 
+// 페이지 메타데이터 함수
+export const meta: Route.MetaFunction = ({ params }) => {
+  const date = DateTime.fromObject({
+    year: Number(params.year),
+    month: Number(params.month),
+    day: Number(params.day),
+  }).setZone("Asia/Seoul").setLocale("ko");
+  return [{ title: `The best products of ${date.toFormat("yyyy-MM-dd")} | wemake` }];
+};
+
+
 /**
  * URL 파라미터 스키마 정의
  *
@@ -50,17 +61,6 @@ const paramsSchema = z.object({
   day: z.coerce.number(), // 일: 문자열 → 숫자 변환
 });
 
-/**
- * 페이지 메타데이터 함수
- *
- * React Router v7의 meta 함수로 페이지의 <title> 등 메타데이터를 설정합니다.
- * 이 함수는 서버 사이드 렌더링 시에도 실행되어 SEO에 중요한 역할을 합니다.
- *
- * @see https://reactrouter.com/start/framework/route-module - Route Module API
- */
-export const meta: Route.MetaFunction = () => {
-  return [{ title: "Daily Leaderboards | wemake" }];
-};
 
 /**
  * 데이터 로더 함수

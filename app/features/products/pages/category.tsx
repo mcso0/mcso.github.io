@@ -1,58 +1,45 @@
-import type { MetaFunction } from "react-router";
+import type { Route } from "./+types/category";
+import PageHero from "~/common/components/page-hero";
+import ProductCard from "../components/product-card";
+import ProductPagination from "~/common/components/product-pagination";
 
-export const meta: MetaFunction = () => {
+
+export const meta: Route.MetaFunction = ({ params }) => {
   return [
-    { title: "Category Products | wemake" },
-    { name: "description", content: "Explore products by category" },
+    { title: `Developer Tools ${params.category} | wemake` },
+    { name: "description", content: `Browse developer tools products` },
   ];
 };
 
-export function loader() {
-  return {
-    category: "web",
-    categoryName: "Web Development",
-    products: [
-      { id: 1, name: "Product A", description: "An amazing product", rating: 4.8 },
-      { id: 2, name: "Product B", description: "Another great product", rating: 4.6 },
-      { id: 3, name: "Product C", description: "Fantastic tool", rating: 4.9 },
-    ],
-  };
+
+export function loader({ params }: Route.LoaderArgs) {
+  return { category: params.category };
 }
 
-export default function Category() {
-  const category = "web";
-  const categoryName = "Web Development";
-  const products = [
-    { id: 1, name: "Product A", description: "An amazing product", rating: 4.8 },
-    { id: 2, name: "Product B", description: "Another great product", rating: 4.6 },
-    { id: 3, name: "Product C", description: "Fantastic tool", rating: 4.9 },
-  ];
-
+export default function Category({ loaderData }: Route.ComponentProps) {
   return (
-    <div className="px-20 py-20">
-      <div className="space-y-8">
-        <div>
-          <h1 className="text-4xl font-bold leading-tight tracking-tight">
-            {categoryName} Products
-          </h1>
-          <p className="text-xl font-light text-muted-foreground">
-            Explore {categoryName} products in our community
-          </p>
-        </div>
-        
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {products.map((product) => (
-            <div key={product.id} className="p-6 border rounded-lg">
-              <h3 className="text-xl font-semibold mb-2">{product.name}</h3>
-              <p className="text-muted-foreground mb-4">{product.description}</p>
-              <div className="flex items-center justify-between">
-                <span className="text-sm text-muted-foreground">Rating</span>
-                <span className="font-semibold">{product.rating} ⭐</span>
-              </div>
-            </div>
-          ))}
-        </div>
+    <div className="space-y-10">
+      <PageHero
+        title={`${loaderData.category}`}
+        subtitle={`Tools for developers to build products faster`}
+      />
+       <div className="space-y-10 w-full max-w-screen-md mx-auto">
+        {Array.from({ length: 11 }).map((_, index) => (
+          <ProductCard
+            key={`product-${index + 1}`}
+            id={`product-${index + 1}`}
+            name={`Product ${index + 1}`}
+            description={`Product description ${index + 1}`}
+            commentCount={12}
+            viewCount={12}
+            likeCount={12}
+            upvoteCount={120}
+          />
+        ))}
       </div>
+
+      <ProductPagination totalPages={10} />
     </div>
+
   );
-} 
+}

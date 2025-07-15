@@ -29,7 +29,7 @@ export default function ProductPagination({
 }: ProductPaginationProps) {
   // URL에서 현재 페이지 번호를 가져옴 (기본값: 1)
   const [searchParams, setSearchParams] = useSearchParams();
-  const page = Number(searchParams.get("page")) || 1;
+  const page = Number(searchParams.get("page") ?? 1);
 
   return (
     <Pagination className="flex items-center gap-2 justify-center">

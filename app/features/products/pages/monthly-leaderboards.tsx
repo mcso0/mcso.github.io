@@ -13,99 +13,90 @@ const paramsSchema = z.object({
   month: z.coerce.number(),
 });
 
-export const meta: Route.MetaFunction = () => {
-  return [
-    { title: "Monthly Leaderboards | wemake" },
-    { name: "description", content: "Top performing products monthly" },
-  ];
+export const meta: Route.MetaFunction = ({ params}) => {
+  const date = DateTime.fromObject({
+    year: Number(params.year),
+    month: Number(params.month),
+  }).setZone("Asia/Seoul").setLocale("ko");
+  return [{ title: `Best products of ${date.toFormat("yyyy MMMM", { locale: "en" })} | wemake` }];
 };
 
 export const loader = ({ params }: Route.LoaderArgs) => {
-  const { success, data: parsedParams } = paramsSchema.safeParse(params);
+  const { success, data: parsedDate } = paramsSchema.safeParse(params);
   if (!success) {
     throw data(
       {
         error_code: "INVALID_PARAMS",
-        error_message: "Invalid month format",
+        error_message: "Invalid date format",
       },
       { status: 400 }
     );
   }
-
-  const { year, month } = parsedParams;
-
-  // 월 번호 검증 (1-12)
-  if (month < 1 || month > 12) {
+  const date = DateTime.fromObject({
+    year: parsedDate.year,
+    month: parsedDate.month,
+  }).setZone("Asia/Seoul");
+  if (!date.isValid) {
     throw data(
       {
-        error_code: "INVALID_MONTH",
-        error_message: "Invalid month number",
+        error_code: "INVALID_DATE",
+        error_message: "Invalid date",
       },
       { status: 400 }
     );
   }
-
-  const currentMonth = DateTime.now().setZone("Asia/Seoul");
-  const requestedMonth = DateTime.fromObject({ year, month }).setZone(
-    "Asia/Seoul"
-  );
-
-  if (requestedMonth > currentMonth) {
+  const today = DateTime.now().setZone("Asia/Seoul").startOf("month");
+  if (date > today) {
     throw data(
       {
-        error_code: "FUTURE_MONTH",
-        error_message: "Future month",
+        error_code: "FUTURE_DATE",
+        error_message: "Future date",
       },
       { status: 400 }
     );
   }
-
   return {
-    year,
-    month,
+    ...parsedDate,
   };
 };
 
 export default function MonthlyLeaderboards({
   loaderData,
 }: Route.ComponentProps) {
-  const currentMonth = DateTime.fromObject({
+  const urlDate = DateTime.fromObject({
     year: loaderData.year,
     month: loaderData.month,
-  }).setZone("Asia/Seoul");
-
-  const previousMonth = currentMonth.minus({ months: 1 });
-  const nextMonth = currentMonth.plus({ months: 1 });
-  const isCurrentMonth = currentMonth.hasSame(
-    DateTime.now().setZone("Asia/Seoul"),
-    "month"
+  });
+  const previousMonth = urlDate.minus({ months: 1 });
+  const nextMonth = urlDate.plus({ months: 1 });
+  const isThisMonth = urlDate.equals(
+    DateTime.now().setZone("Asia/Seoul").startOf("month")
   );
-
   return (
     <div className="space-y-10">
       <PageHero
-        title={`The best of ${currentMonth.toFormat("yyyy.MM")}`}
-        subtitle={`The best products of ${currentMonth.toFormat("yyyy.MM")}`}
+        title={`Best products of ${urlDate.toFormat("yyyy MMMM", { locale: "en" })}`}
+        subtitle={`See the best products of the month`}
       />
       <div className="flex items-center gap-2 justify-center">
         <Button variant="secondary" asChild className="px-4">
           <Link
             to={`/products/leaderboards/monthly/${previousMonth.year}/${previousMonth.month}`}
           >
-            &larr; {previousMonth.toFormat("yyyy.MM")}
+            &larr; {previousMonth.toFormat("yy.MM")}
           </Link>
         </Button>
-        {!isCurrentMonth ? (
+        {!isThisMonth ? (
           <Button variant="secondary" asChild>
             <Link
               to={`/products/leaderboards/monthly/${nextMonth.year}/${nextMonth.month}`}
             >
-              {nextMonth.toFormat("yyyy.MM")} &rarr;
+              {nextMonth.toFormat("yy.MM")} &rarr;
             </Link>
           </Button>
         ) : (
           <Button variant="secondary" disabled>
-            {nextMonth.toFormat("yyyy.MM")} &rarr;
+            {nextMonth.toFormat("yy.MM")} &rarr;
           </Button>
         )}
       </div>
@@ -139,5 +130,5 @@ export const ErrorBoundary = ({ error }: Route.ErrorBoundaryProps) => {
   if (error instanceof Error) {
     return <div>{error.message}</div>;
   }
-  return <div>Unknown error</div>;
+  return <div>Unknown errorr</div>;
 };

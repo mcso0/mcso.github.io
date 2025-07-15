@@ -33,6 +33,7 @@ export default [
       index("features/products/pages/categories.tsx"),
       route("/:category", "features/products/pages/category.tsx"),
     ]),
+    
     route("/search", "features/products/pages/search.tsx"),
     route("/submit", "features/products/pages/submit.tsx"),
     route("/promote", "features/products/pages/promote.tsx"),
