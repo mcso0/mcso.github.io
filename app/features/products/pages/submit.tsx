@@ -1,81 +1,103 @@
-import type { MetaFunction } from "react-router";
+import type { Route } from "./+types/submit";
+import PageHero from "~/common/components/page-hero";
+import { Form } from "react-router";
+import { Button } from "~/common/components/ui/button";
+import { Input } from "~/common/components/ui/input";
+import { Label } from "~/common/components/ui/label";
+import { Textarea } from "~/common/components/ui/textarea";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "~/common/components/ui/card";
+import InputPair from "~/common/components/input-pair";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "~/common/components/ui/select";
+import SelectPair from "~/common/components/select-pair";
 
-export const meta: MetaFunction = () => {
+export const meta: Route.MetaFunction = () => {
   return [
     { title: "Submit Product | wemake" },
     {
       name: "description",
-      content: "Submit your product to the wemake community",
+      content: "Submit your product",
     },
   ];
-}
+};
 
-export function loader() {
+export function loader({ request }: Route.LoaderArgs) {
   return {};
-}
-
-export function action() {
-  // Handle form submission
-  return { success: true };
 }
 
 export default function Submit() {
   return (
-    <div className="px-20 py-20">
-      <div className="space-y-8">
-        <div>
-          <h1 className="text-4xl font-bold leading-tight tracking-tight">
-            Submit Your Product
-          </h1>
-          <p className="text-xl font-light text-muted-foreground">
-            Share your amazing product with the wemake community
-          </p>
+    <div className="space-y-10">
+      <PageHero
+        title="Submit your product"
+        subtitle="Share your product with the world"
+        className=""
+      />
+      <Form className="grid grid-cols-2 gap-10 max-w-screen-lg mx-auto">
+        <div className="space-y-10">
+          <InputPair
+            label="Product Name"
+            description="This is your product name"
+            id="name"
+            name="name"
+            placeholder="Enter your product name"
+            type="text"
+            required
+          />
+          <InputPair
+            label="Tagline"
+            description="60 characters or less"
+            id="tagline"
+            name="tagline"
+            placeholder="A concise description of your product"
+            type="text"
+            required
+          />
+          <InputPair
+            label="URL"
+            description="The URL of your product"
+            id="url"
+            name="url"
+            placeholder="https://example.com"
+            type="text"
+            required
+          />
+          <InputPair
+            textarea
+            label="Description"
+            description="A detailed description of your product"
+            id="description"
+            name="description"
+            placeholder="A detailed description of your product"
+            required
+            type="text"
+          />
+          <SelectPair
+            name="category"
+            label="Category"
+            description="The category of your product"
+            placeholder="Select a category"
+            options={[
+              { label: "AI", value: "ai" },
+              { label: "Productivity", value: "productivity" },
+              { label: "Marketing", value: "marketing" },
+              { label: "Design", value: "design" },
+              { label: "Development", value: "development" },
+              { label: "Other", value: "other" },
+            ]}
+          />
         </div>
-
-        <div className="max-w-2xl mx-auto">
-          <form className="space-y-6">
-            <div>
-              <label className="block text-sm font-medium mb-2">
-                Product Name
-              </label>
-              <input
-                type="text"
-                placeholder="Enter your product name"
-                className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium mb-2">
-                Description
-              </label>
-              <textarea
-                placeholder="Describe your product"
-                rows={4}
-                className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium mb-2">
-                Product URL
-              </label>
-              <input
-                type="url"
-                placeholder="https://your-product.com"
-                className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-            </div>
-
-            <button
-              type="submit"
-              className="w-full bg-blue-500 text-white py-3 px-6 rounded-lg hover:bg-blue-600 transition-colors"
-            >
-              Submit Product
-            </button>
-          </form>
-        </div>
-      </div>
+      </Form>
     </div>
   );
 }
