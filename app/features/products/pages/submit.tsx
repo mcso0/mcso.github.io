@@ -20,6 +20,7 @@ import {
   SelectValue,
 } from "~/common/components/ui/select";
 import SelectPair from "~/common/components/select-pair";
+import Footer from "~/common/components/page-footer";
 
 export const meta: Route.MetaFunction = () => {
   return [
@@ -43,7 +44,7 @@ export default function Submit() {
         subtitle="Share your product with the world"
         className=""
       />
-      <Form className="grid grid-cols-2 gap-10 max-w-screen-lg mx-auto">
+      <Form className="grid grid-cols-2 gap-20 max-w-screen-lg mx-auto mb-40">
         <div className="space-y-10">
           <InputPair
             label="Product Name"
@@ -69,7 +70,7 @@ export default function Submit() {
             id="url"
             name="url"
             placeholder="https://example.com"
-            type="text"
+            type="url"
             required
           />
           <InputPair
@@ -96,8 +97,15 @@ export default function Submit() {
               { label: "Other", value: "other" },
             ]}
           />
+          <Button type="submit" className="w-full">
+            Submit
+          </Button>
+        </div>
+        <div className="w-full h-full bg-muted-foreground/10 flex items-center justify-center">
+          <span>background_img</span>
         </div>
       </Form>
+      <Footer />
     </div>
   );
 }

@@ -27,7 +27,7 @@ export default function SelectPair({
   return (
     <div className="space-y-2 flex flex-col">
       <Label
-        className="flex flex-col gap-1 items-start"
+        className="flex flex-col items-start !gap-0"
         onClick={() => setOpen(true)}
       >
         <span className="text-lg font-semibold">{label}</span>

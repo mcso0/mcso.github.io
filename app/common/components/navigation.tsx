@@ -162,7 +162,8 @@ export function Navigation({
   return (
     <nav
       className="flex px-20 h-16 items-center justify-between
-    backdrop-blur fixed top-0 left-0 right-0 z-50 bg-background/50"
+    backdrop-blur-[8px] fixed top-0 left-0 right-0 z-50 bg-background/30"
+      // bg-[radial-gradient(rgba(0,0,0,0)_2px,_var(--background)_4px)] bg-[length:4px_4px]
     >
       <div className="flex items-center gap-4">
         <Link to="/" className="font-bold text-lg tracking-tight text-primary">
