@@ -21,6 +21,8 @@ import {
 } from "~/common/components/ui/select";
 import SelectPair from "~/common/components/select-pair";
 import Footer from "~/common/components/page-footer";
+import { ImagePlus, UploadIcon, X } from "lucide-react";
+import { useState } from "react";
 
 export const meta: Route.MetaFunction = () => {
   return [
@@ -37,6 +39,14 @@ export function loader({ request }: Route.LoaderArgs) {
 }
 
 export default function Submit() {
+  const [icon, setIcon] = useState<string | null>(null);
+  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files) {
+      const file = event.target.files[0];
+      setIcon(URL.createObjectURL(file));
+    }
+  };
+
   return (
     <div className="space-y-10">
       <PageHero
@@ -45,6 +55,67 @@ export default function Submit() {
         className=""
       />
       <Form className="grid grid-cols-2 gap-20 max-w-screen-lg mx-auto mb-40">
+        <div className="w-full flex flex-col items-start space-y-2">
+          <Label htmlFor="background_img" className="flex flex-col gap-0 items-start">
+            <span className="text-lg font-medium">Logo</span>
+            <small className="text-sm text-muted-foreground/70">
+              this is the Logo of your product
+            </small>
+          </Label>
+          {icon ? (
+            <div className="relative w-full h-[400px]">
+              <div className="flex w-full h-full rounded-xl shadow-xl bg-muted-foreground/10 overflow-hidden">
+                <img src={icon} alt="icon" className="w-full h-full object-cover" />
+              </div>
+              <div className="absolute top-2 right-2">
+                <Button
+                  variant="secondary"
+                  size="icon"
+                  onClick={() => setIcon(null)}
+                  className="cursor-pointer"
+                >
+                  <X className="size-4" />
+                </Button>
+              </div>
+            </div>
+          ) : <div className="flex w-full h-[400px] rounded-xl shadow-xl bg-muted-foreground/10">
+          <div className="flex flex-col gap-2 items-center justify-center w-full h-full">
+            <ImagePlus className="size-10 text-muted-foreground" />
+            <div className="flex flex-col gap-0 text-center">
+                    <span className="text-sm text-muted-foreground leading-tight tracking-tight">
+                      Upload your product icon file
+                    </span>
+                    <span className="text-sm text-muted-foreground leading-tight tracking-tight">
+                      (png, jpg, jpeg, svg)
+                    </span>
+                  </div>
+          </div>
+        </div> } 
+          <div className="w-full flex flex-col gap-2">
+            <Input 
+              type="file" 
+              id="icon" 
+              className="hidden" 
+              onChange={onChange} 
+              required 
+              name="icon" 
+            />
+            <Button variant="outline" className="w-full cursor-pointer" asChild>
+              <label htmlFor="icon">
+                <UploadIcon className="size-4 " />
+                Upload file
+              </label>
+            </Button>
+          </div>
+          <div className="flex flex-col gap-0 text-sm text-muted-foreground/70">
+            <span>
+              Recommended size: 128x128px
+            </span>
+            <span>
+              Allowed formats: PNG, JPEG, SVG / Max file size: 1MB
+            </span>
+          </div>
+        </div>
         <div className="space-y-10">
           <InputPair
             label="Product Name"
@@ -97,12 +168,9 @@ export default function Submit() {
               { label: "Other", value: "other" },
             ]}
           />
-          <Button type="submit" className="w-full">
+          <Button type="submit" className="w-full" size="lg" variant="default">
             Submit
           </Button>
-        </div>
-        <div className="w-full h-full bg-muted-foreground/10 flex items-center justify-center">
-          <span>background_img</span>
         </div>
       </Form>
       <Footer />

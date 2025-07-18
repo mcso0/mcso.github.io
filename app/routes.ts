@@ -37,6 +37,15 @@ export default [
     route("/search", "features/products/pages/search.tsx"),
     route("/submit", "features/products/pages/submit.tsx"),
     route("/promote", "features/products/pages/promote.tsx"),
+
+    ...prefix("/:productId", [ 
+      index("features/products/pages/redirect-product.tsx"),
+      route("/overview", "features/products/pages/product-overview.tsx"),
+      ...prefix("reviews", [
+        index("features/products/pages/product-reviews.tsx"),
+        route("/new", "features/products/pages/product-new-review.tsx"),
+      ]),
+    ]),
   ]),
   // Jobs
   ...prefix("jobs", [
