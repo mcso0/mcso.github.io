@@ -33,17 +33,18 @@ export default [
       index("features/products/pages/categories.tsx"),
       route("/:category", "features/products/pages/category.tsx"),
     ]),
-    
+
     route("/search", "features/products/pages/search.tsx"),
     route("/submit", "features/products/pages/submit.tsx"),
     route("/promote", "features/products/pages/promote.tsx"),
 
-    ...prefix("/:productId", [ 
+    ...prefix("/:productId", [
       index("features/products/pages/redirect-product.tsx"),
-      route("/overview", "features/products/pages/product-overview.tsx"),
-      ...prefix("reviews", [
-        index("features/products/pages/product-reviews.tsx"),
-        route("/new", "features/products/pages/product-new-review.tsx"),
+      layout("features/products/layouts/product-overview-layout.tsx", [
+        route("/overview", "features/products/pages/product-overview.tsx"),
+        ...prefix("reviews", [
+          index("features/products/pages/product-reviews.tsx"),
+        ]),
       ]),
     ]),
   ]),
@@ -64,9 +65,12 @@ export default [
     route("/create", "features/community/pages/create-post.tsx"),
   ]),
   // Ideas
-  ...prefix("ideas", [index("features/ideas/pages/ideas.tsx")]),
+  ...prefix("/ideas", [
+    index("features/ideas/pages/ideas.tsx"),
+    route("/:ideaId", "features/ideas/pages/idea.tsx"),
+  ]),
   // Teams
-  ...prefix("teams", [
+  ...prefix("/teams", [
     index("features/teams/pages/teams.tsx"),
     route("/create", "features/teams/pages/create-team.tsx"),
   ]),

@@ -56,7 +56,10 @@ export default function Submit() {
       />
       <Form className="grid grid-cols-2 gap-20 max-w-screen-lg mx-auto mb-40">
         <div className="w-full flex flex-col items-start space-y-2">
-          <Label htmlFor="background_img" className="flex flex-col gap-0 items-start">
+          <Label
+            htmlFor="background_img"
+            className="flex flex-col gap-0 items-start"
+          >
             <span className="text-lg font-medium">Logo</span>
             <small className="text-sm text-muted-foreground/70">
               this is the Logo of your product
@@ -65,7 +68,11 @@ export default function Submit() {
           {icon ? (
             <div className="relative w-full h-[400px]">
               <div className="flex w-full h-full rounded-xl shadow-xl bg-muted-foreground/10 overflow-hidden">
-                <img src={icon} alt="icon" className="w-full h-full object-cover" />
+                <img
+                  src={icon}
+                  alt="icon"
+                  className="w-full h-full object-cover"
+                />
               </div>
               <div className="absolute top-2 right-2">
                 <Button
@@ -78,27 +85,29 @@ export default function Submit() {
                 </Button>
               </div>
             </div>
-          ) : <div className="flex w-full h-[400px] rounded-xl shadow-xl bg-muted-foreground/10">
-          <div className="flex flex-col gap-2 items-center justify-center w-full h-full">
-            <ImagePlus className="size-10 text-muted-foreground" />
-            <div className="flex flex-col gap-0 text-center">
-                    <span className="text-sm text-muted-foreground leading-tight tracking-tight">
-                      Upload your product icon file
-                    </span>
-                    <span className="text-sm text-muted-foreground leading-tight tracking-tight">
-                      (png, jpg, jpeg, svg)
-                    </span>
-                  </div>
-          </div>
-        </div> } 
+          ) : (
+            <div className="flex w-full h-[400px] rounded-xl shadow-xl bg-muted-foreground/10">
+              <div className="flex flex-col gap-2 items-center justify-center w-full h-full">
+                <ImagePlus className="size-10 text-muted-foreground" />
+                <div className="flex flex-col gap-0 text-center">
+                  <span className="text-sm text-muted-foreground leading-tight tracking-tight">
+                    Upload your product icon file
+                  </span>
+                  <span className="text-sm text-muted-foreground leading-tight tracking-tight">
+                    (png, jpg, jpeg, svg)
+                  </span>
+                </div>
+              </div>
+            </div>
+          )}
           <div className="w-full flex flex-col gap-2">
-            <Input 
-              type="file" 
-              id="icon" 
-              className="hidden" 
-              onChange={onChange} 
-              required 
-              name="icon" 
+            <Input
+              type="file"
+              id="icon"
+              className="hidden"
+              onChange={onChange}
+              required
+              name="icon"
             />
             <Button variant="outline" className="w-full cursor-pointer" asChild>
               <label htmlFor="icon">
@@ -108,12 +117,8 @@ export default function Submit() {
             </Button>
           </div>
           <div className="flex flex-col gap-0 text-sm text-muted-foreground/70">
-            <span>
-              Recommended size: 128x128px
-            </span>
-            <span>
-              Allowed formats: PNG, JPEG, SVG / Max file size: 1MB
-            </span>
+            <span>Recommended size: 128x128px</span>
+            <span>Allowed formats: PNG, JPEG, SVG / Max file size: 1MB</span>
           </div>
         </div>
         <div className="space-y-10">
