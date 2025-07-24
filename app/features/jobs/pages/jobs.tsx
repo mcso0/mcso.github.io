@@ -6,7 +6,6 @@ import PageHero from "~/common/components/page-hero";
 import { JobCard } from "~/features/jobs/components/job-card";
 import { JOB_TYPES, LOCATION_TYPES, SALARY_RANGES } from "../constants";
 
-
 // TODO: 추후 지구 효과 추가 예정
 // import Earth from "../../../spline/earth";
 
@@ -48,17 +47,18 @@ export default function Jobs() {
         <div className="grid grid-cols-3 gap-5 col-span-4">
           {Array.from({ length: 11 }).map((_, index) => (
             <JobCard
-            id="JobId"
-            company="Apple"
-            companyLogoUrl="https://github.com/apple.png"
-            companyHq="San Francisco, CA"
-            title="Software Engineer"
-            postedAt="12 hours ago"
-            type="Full-Time"
-            positionLocation="Remote"
-            salary="$ 100,000 - $ 120,000"
-          />
-        ))}
+              key={index}
+              id="JobId"
+              company="Apple"
+              companyLogoUrl="https://github.com/apple.png"
+              companyHq="San Francisco, CA"
+              title="Software Engineer"
+              postedAt="12 hours ago"
+              type="Full-Time"
+              positionLocation="Remote"
+              salary="$ 100,000 - $ 120,000"
+            />
+          ))}
         </div>
         {/* sidebar */}
         <div className="col-span-2">
@@ -72,7 +72,7 @@ export default function Jobs() {
                       {type.label}
                   </Button>
                 ))}
-            </div>
+              </div>
             </div>
             {/* location */}
             <div className="flex flex-col items-start gap-3">
@@ -82,7 +82,7 @@ export default function Jobs() {
                   <Button variant="outline" className="cursor-pointer" key={location.value}>
                     {location.label}
                   </Button>
-                  ))}
+                ))}
               </div>
             </div>
             {/* salary */}

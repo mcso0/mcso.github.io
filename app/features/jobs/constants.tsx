@@ -8,8 +8,12 @@ export const JOB_TYPES = [
         value: "part-time",
     },
     {
-        label: "Remote",
-        value: "remote",
+        label: "Freelance",
+        value: "freelance",
+    },
+    {
+        label: "Internship",
+        value: "internship",
     },
 ] as const;
 
@@ -27,7 +31,6 @@ export const LOCATION_TYPES = [
         value: "hybrid",
     },
 ] as const;
-
 
 export const SALARY_RANGES = [
     "$0 - $50,000",

@@ -1,7 +1,10 @@
 import type { Route } from "./+types/job";
 
 export const meta: Route.MetaFunction = () => {
-  return [{ title: "Job Detail" }];
+  return [
+    { title: "Job Detail | wemake" },
+    { name: "description", content: "Job details" },
+  ];
 };
 
 export default function JobPage() {
@@ -10,4 +13,4 @@ export default function JobPage() {
       <h1>Job Detail</h1>
     </div>
   );
-} 
+}
