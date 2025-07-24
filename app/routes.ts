@@ -51,10 +51,7 @@ export default [
   // Jobs
   ...prefix("jobs", [
     index("features/jobs/pages/jobs.tsx"),
-    // route("/remote", "features/jobs/pages/remote-jobs.tsx"),
-    // route("/full-time", "features/jobs/pages/full-time-jobs.tsx"),
-    // route("/freelance", "features/jobs/pages/freelance-jobs.tsx"),
-    // route("/internship", "features/jobs/pages/internship-jobs.tsx"),
+    route("/:jobId", "features/jobs/pages/job.tsx"),
     route("/submit", "features/jobs/pages/submit.tsx"),
   ]),
   // Community
