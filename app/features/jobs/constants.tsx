@@ -1,4 +1,4 @@
-export const JOB_TYPES = [
+export const JOB_TYPE = [
     {
         label: "Full-Time",
         value: "full-time",
@@ -17,7 +17,7 @@ export const JOB_TYPES = [
     },
 ] as const;
 
-export const LOCATION_TYPES = [
+export const LOCATION_TYPE = [
     {
         label: "Remote",
         value: "remote",
