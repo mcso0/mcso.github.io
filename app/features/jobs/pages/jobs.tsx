@@ -5,10 +5,9 @@ import { Button } from "~/common/components/ui/button";
 import { Link } from "react-router";
 import { JOB_TYPE, LOCATION_TYPE, SALARY_RANGES } from "../constants";
 import { useSearchParams } from "react-router";
+import { cn } from "~/lib/utils";
 
 export const meta: Route.MetaFunction = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
-
   return [
     { title: "jobs | wemake" },
     { name: "description", content: "Find your dream job!" },
@@ -16,6 +15,12 @@ export const meta: Route.MetaFunction = () => {
 };
 
 export default function Jobs() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const onFilterClick = (key: string, value: string) => {
+    searchParams.set(key, value);
+    setSearchParams(searchParams);
+  };
+
   return (
     <div className="space-y-10">
       <PageHero
@@ -33,11 +38,16 @@ export default function Jobs() {
               {JOB_TYPE.map(type => (
                 <Button
                   key={type.value}
-                  className="hover:cursor-pointer text-xs"
+                  className={cn(
+                    type.value === searchParams.get("type")
+                      ? "!bg-accent"
+                      : "hover:cursor-pointer"
+                  )}
                   variant="outline"
                   size="sm"
+                  onClick={() => onFilterClick("type", type.value)}
                 >
-                  <Link to={`/jobs?type=${type.value}`}>{type.label}</Link>
+                  {type.label}
                 </Button>
               ))}
             </div>
@@ -51,13 +61,16 @@ export default function Jobs() {
               {LOCATION_TYPE.map(location => (
                 <Button
                   key={location.value}
-                  className="hover:cursor-pointer text-xs"
+                  className={cn(
+                    location.value === searchParams.get("location")
+                      ? "!bg-accent"
+                      : "hover:cursor-pointer"
+                  )}
                   variant="outline"
                   size="sm"
+                  onClick={() => onFilterClick("location", location.value)}
                 >
-                  <Link to={`/jobs?location=${location.value}`}>
-                    {location.label}
-                  </Link>
+                  {location.label}
                 </Button>
               ))}
             </div>
@@ -72,11 +85,16 @@ export default function Jobs() {
               {SALARY_RANGES.map(salary => (
                 <Button
                   key={salary}
-                  className="hover:cursor-pointer text-xs"
+                  className={cn(
+                    salary === searchParams.get("salary")
+                      ? "!bg-accent"
+                      : "hover:cursor-pointer"
+                  )}
                   variant="outline"
                   size="sm"
+                  onClick={() => onFilterClick("salary", salary)}
                 >
-                  <Link to={`/jobs?salary=${salary}`}>{salary}</Link>
+                  {salary}
                 </Button>
               ))}
             </div>

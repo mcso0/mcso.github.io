@@ -19,6 +19,7 @@ import { Button } from "../components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "../components/ui/avatar";
 import { Badge } from "../components/ui/badge";
 import { MainBanner } from "../components/main-banner";
+import { FlickeringGrid } from "../components/magicui/flickering-grid";
 
 // 메타데이터를 정의하는 함수입니다.
 // 이 함수는 웹페이지의 제목과 설명을 설정합니다.
@@ -34,8 +35,19 @@ export const meta: MetaFunction = () => {
 
 export default function Home() {
   return (
-    <div className="space-y-40">
-      <MainBanner />
+    <div className="space-y-32">
+      <div className="relative h-[500px] w-full overflow-hidden bg-background">
+        <FlickeringGrid
+          className="relative inset-0 z-0 [mask-image:radial-gradient(800px_circle_at_center,white,transparent)]"
+          squareSize={4}
+          gridGap={6}
+          color="#60A5FA"
+          maxOpacity={0.5}
+          flickerChance={0.1}
+          height={500}
+        />
+      </div>
+      {/* <MainBanner /> */}
       {/* 오늘의 제품 */}
       <div className="grid grid-cols-3 gap-4">
         <div className="flex flex-col gap-2">
