@@ -39,10 +39,19 @@ export function loader({ request }: Route.LoaderArgs) {
 }
 
 export default function Submit() {
+  
+  // useState<string | null>(null)에서 <string | null> 부분은 상태(state)의 타입을 의미해요.
+  // 즉, icon이라는 상태는 string(문자열) 또는 null 값이 될 수 있다는 뜻이에요.
+  // 괄호 안의 null은 icon의 초기값(기본값)이 null임을 나타냅니다.
+  // 예시: const [icon, setIcon] = useState<string | null>(null);
   const [icon, setIcon] = useState<string | null>(null);
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    
+    // event.target.files는 사용자가 input[type="file"]에서 선택한 파일들의 리스트(파일 목록)를 의미해요.
+    // 파일이 하나라도 선택되었는지 확인하는 조건문입니다.
     if (event.target.files) {
       const file = event.target.files[0];
+      // 사용자가 선택한 파일을 브라우저에서 바로 볼 수 있도록 임시 URL을 만들어서 icon 상태에 저장해요.
       setIcon(URL.createObjectURL(file));
     }
   };
@@ -105,7 +114,7 @@ export default function Submit() {
               type="file"
               id="icon"
               className="hidden"
-              onChange={onChange}
+              onChange={onChange} // onChange는 input 값이 변경될 때 실행되는 이벤트 핸들러를 지정하는 props입니다.
               required
               name="icon"
             />
